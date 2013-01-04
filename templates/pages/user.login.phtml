@@ -1,0 +1,42 @@
+<div class="container">
+
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div class="hero-unit">
+		<h1>Sign in to Gamitu.de</h1>
+		<?php if(isset($this->message)):?>
+			<?php if($this->message):?>
+			<p class="text-error"><?=$this->message?></p>
+			<?php endif; ?>
+		<?php endif; ?>
+		
+	</div>
+	
+	<div class="row">
+		<div class="span4">
+			<form class="navbar-form pull-left" action="/user/login" method="post">
+				
+				<fieldset>
+					<legend>Login</legend>
+					<div class="control-group <?=$this->form_error?'error':''?>">
+						<label>Username</label>
+						<input name="username" type="text" placeholder="joe_blogs">
+					</div>
+					<div class="control-group <?=$this->form_error?'error':''?>">
+						<label>Password</label>
+						<input name="password" type="password" placeholder="password">
+					</div>
+					<div class="control-group <?=$this->form_error?'error':''?>">
+						<button type="submit" class="btn">Go go go!</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<hr>
+
+	<footer>
+		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
+	</footer>
+
+</div> <!-- /container -->

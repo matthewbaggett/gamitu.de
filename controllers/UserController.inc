@@ -1,0 +1,116 @@
+<?php 
+
+class UserController extends BaseController{
+	public function RegisterGoogleAction(){
+		$scopes = array(
+				'https://www.googleapis.com/auth/userinfo.profile',
+				"https://www.googleapis.com/auth/latitude.all.best", 
+				"https://www.googleapis.com/auth/latitude.all.city", 
+				"https://www.googleapis.com/auth/latitude.current.best", 
+				"https://www.googleapis.com/auth/latitude.current.city"
+		);
+		$auth = eden('google')
+			->auth(
+				GOOGLE_CLIENT_ID, 
+				GOOGLE_CLIENT_SECRET, 
+				'http://gamitu.de/user/register-google', 
+				GOOGLE_API_KEY);
+		
+		
+		//if no code and no session
+		if(!isset($_GET['code']) && !isset($_SESSION['token'])) {
+			//redirect to login
+			$login = $auth->getLoginUrl($scopes);
+			header('Location: '.$login);
+			exit;
+		}
+		
+		//Code is returned back from google
+		
+		if(isset($_GET['code'])) {
+			//save it to session
+			$access = $auth->getAccess($_GET['code']);
+			$userinfo = eden('google')->userinfo($access['access_token']);
+			$profile = $userinfo->me();
+			
+			//First try to log them in with these credentials:
+			$log_in_success = user::factory()->attempt_login_with_google($profile['id']);
+			if($log_in_success instanceof user){
+				$log_in_success->set_access_token($access['access_token'])->save();
+				header("Location: /user/edit");
+			}else{
+				$oUser = user::factory()
+					->set_access_token($access['access_token'])
+					->set_firstname($profile['given_name'])
+					->set_surname($profile['family_name'])
+					->set_link($profile['link'])
+					->set_face($profile['picture'])
+					->set_gender($profile['male'])
+					->set_birthday($profile['birthday'])
+					->set_locale($profile['locale'])
+					->set_google_id($profile['id'])
+					->save()->reload();
+				$_SESSION['registration_id'] = $oUser->get_id();
+				header("Location: /user/register");
+			}
+			
+			exit;
+		}
+	}
+	
+	public function LoginAction(){
+		if(count($_POST)>0){
+			$log_in_success = user::factory()->attempt_login($_POST['username'],$_POST['password']);
+			if($log_in_success){
+				header("Location: /user/edit");
+			}else{
+				$this->_view->message = "Sorry, incorrect username or password";
+				$this->_view->form_error = true;
+			}
+			
+		}
+	}
+	
+	public function RegisterAction(){
+		if(count($_POST)>0){
+			user::factory()
+				->load_by_id($_SESSION['registration_id'])
+				->set_username($_POST['username'])
+				->set_password(crypt($_POST['password']))
+				->save()
+				->login();
+			header("Location: /user/edit");
+		}
+	}
+	
+	public function EditAction(){
+		
+	}
+	
+	public function LogoutAction(){
+		user::logout();
+		header("Location: /");
+		exit;
+	}
+	
+	public function updateLatitudeFeedAction(){
+		$user = user::get_current_user();
+		$user->update_latitude_locations();
+		//header("Location: /user/edit");
+		exit;
+	}
+	
+	public function CronAction(){
+		$users = user::get_all_users();
+		foreach($users as $user){
+			echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
+			try{
+				$user->update_latitude_locations();
+			}catch(Exception $e){
+				$e->getmessage()."\n";
+			}
+			echo "\n\n";
+		}
+		exit;
+	}
+}
