@@ -6,7 +6,7 @@
 	 *
 	 *		https://gist.github.com/1809044
 	 */
-
+	chdir("../");
 	// The commands
 	$commands = array(
 		'echo $PWD',
