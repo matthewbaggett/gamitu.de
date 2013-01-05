@@ -14,7 +14,7 @@
 		'git pull',
 		'git status',
 		'git submodule sync',
-		'git submodule update',
+		'git submodule update --recursive',
 		'git submodule status',
 	);
 
