@@ -1,6 +1,6 @@
 <?php
 $command = "git pull origin";
 echo $command."\n"; 
-exec($command);
+passthru($command);
 
 die("\n\ndone");
