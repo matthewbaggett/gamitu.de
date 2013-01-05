@@ -16,6 +16,7 @@
 		'git submodule sync',
 		'git submodule update --recursive',
 		'git submodule status',
+		'git submodule foreach "(git checkout master; git pull)&"',
 	);
 
 	// Run the commands for output
