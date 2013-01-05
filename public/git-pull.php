@@ -1,5 +1,5 @@
 <?php
-$command = "git pull .";
+$command = "git pull origin";
 echo $command."\n"; 
 exec($command);
 
