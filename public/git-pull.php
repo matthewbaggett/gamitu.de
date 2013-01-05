@@ -1,4 +1,5 @@
 <?php
+ob_start();
 	/**
 	 * GIT DEPLOYMENT SCRIPT
 	 *
@@ -49,3 +50,14 @@
 </pre>
 </body>
 </html>
+<?php
+$output = ob_get_contents();
+ob_end_clean();
+
+echo $output; 
+mail(
+"matthew@baggett.me",
+"Deployment on ".gethostname()." at " . date("d/m/Y H:i:s"),
+$output
+);
+?>
