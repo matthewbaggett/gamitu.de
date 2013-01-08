@@ -122,7 +122,7 @@ class UserController extends BaseController{
 					`uid` = {$this->_view->user->get_uid()};";
 		$deltas = \tcore\db::get_instance()->query($sql_select)->fetchAll();
 		foreach($deltas as $delta){
-			$this->_view->deltas[$delta['pid']] = $delta;
+			$this->_view->deltas[$delta->pid] = $delta;
 		}
 		var_dump($this->_view->deltas);exit;
 	}
