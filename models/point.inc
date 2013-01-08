@@ -45,7 +45,7 @@ class point extends model{
 		$geocode = $this->_reverse_geolocate();	
 		foreach($geocode['results'][0]['address_components'] as $address_component){
 			if($address_component['types'][0] == 'postal_town'){
-				return $address_component['types'][0]['long_name'];
+				return $address_component['long_name'];
 			}
 		}
 		return "Unknown Town";
