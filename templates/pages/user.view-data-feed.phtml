@@ -1,0 +1,23 @@
+<div class="container">
+
+	<table class="table table-bordered table-compact">
+		<tr>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Date &amp; Time</th>
+		<?php foreach($this->feed as $position):?>
+			<tr>
+				<td><?=$position->get_latitude();?></td>
+				<td><?=$position->get_longitude();?></td>
+				<td><?=$position->get_timestamp_ms();?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	
+	<hr>
+
+	<footer>
+		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
+	</footer>
+
+</div> <!-- /container -->

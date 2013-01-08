@@ -93,11 +93,19 @@ class UserController extends BaseController{
 		exit;
 	}
 	
-	public function updateLatitudeFeedAction(){
-		$user = user::get_current_user();
-		$user->update_latitude_locations();
+	public function UpdateLatitudeFeedAction(){
+		$this->_view->user = user::get_current_user();
+		$this->_view->user->update_latitude_locations();
 		//header("Location: /user/edit");
 		exit;
+	}
+	
+	public function ViewDataFeedAction(){
+		$this->_view->user = user::get_current_user();
+		$this->_view->feed = point::factory()
+								->search()
+									->where('uid',$this->_view->user->get_uid())
+									->exec();
 	}
 	
 	public function CronAction(){

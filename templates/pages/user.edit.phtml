@@ -14,7 +14,7 @@
 		<div class="span4">
 			<h2>Last Location</h2>
 			<p>We last saw you near <?=$this->user->get_last_location() instanceof point?$this->user->get_last_location()->get_town():'The Moon';?></p>
-			<p><a class="btn" href="#">View details &raquo;</a></p>
+			<p><a class="btn" href="/user/view-data-feed">View datafeed &raquo;</a></p>
 	 	</div>
 		<div class="span4">
 			<h2>Update your latitude feed manually</h2>

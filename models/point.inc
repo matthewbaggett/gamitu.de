@@ -11,6 +11,8 @@ class point extends model{
 	protected $_longitude_type = model::TYPE_COORD;
 	protected $timestamp_ms;
 	protected $hash;
+	protected $geolocation;
+	protected $_geolocation_type = model::TYPE_BLOB;
 	
 	public function generate_hash(){
 		$this->set_hash(hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms))));
