@@ -36,6 +36,7 @@ class point extends model{
 					->maps(user::get_current_user()->get_access_token())
 						->geocoding()
 							->setLatLng($this->latitude,$this->longitude)
+							->setSensor('true')
 							->getResponse();
 		var_dump($geocode);exit;
 	}
