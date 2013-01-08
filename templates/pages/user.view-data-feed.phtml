@@ -23,13 +23,14 @@
 						<?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?>
 					</td>
 					<td>
-						<?=isset($delta_time)?round($delta_time):'N/A'?> sec
+						<?=$delta->delta_timestamp_ms?round($delta->delta_timestamp_ms):'N/A'?> sec
 					</td>
 					<td>
 						<?=$position->get_latitude();?>,<?=$position->get_longitude();?>
 					</td>
 					<td>
-						<?=isset($delta_lat)?$delta_lat:'N/A'?>,<?=isset($delta_long)?$delta_long:'N/A'?>
+						<?=isset($delta->delta_lat)?$delta->delta_lat:'0'?>,
+						<?=isset($delta->delta_long)?$delta->delta_long:'0'?>
 					</td>
 				</tr>
 				<?php $prev = $position;?>
