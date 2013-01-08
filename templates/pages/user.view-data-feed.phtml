@@ -14,7 +14,7 @@
 				<?php 
 				$classes = array();
 				$delta = $this->deltas[$position->get_pid()];
-				if($delta->delta_latlong){
+				if($delta->delta_latlong <> 0){
 					$classes[] = "success";
 				}
 				?>
