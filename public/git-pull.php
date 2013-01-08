@@ -18,6 +18,7 @@ ob_start();
 		'git submodule sync',
 		'git submodule update --recursive',
 		'git submodule status',
+		'git submodule -q foreach git pull -q origin master'
 	);
 
 	// Run the commands for output
