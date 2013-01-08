@@ -13,18 +13,12 @@
 			<?php foreach($this->feed as $position):?>
 				<?php 
 				$classes = array();
-				
-				if(isset($prev)){
-					
-					$delta_time 	= $prev->get_timestamp_ms() - $position->get_timestamp_ms();
-					$delta_lat 		= $position->get_latitude() - $prev->get_latitude();
-					$delta_long 	= $position->get_longitude() - $prev->get_longitude();
-					if(delta_lat <> 0 && $delta_long <> 0){
-						$classes[] = "success";
-					}
+				$delta = $this->deltas[$position->get_pid()];
+				if($delta->delta_latlong){
+					$classes[] = "success";
 				}
 				?>
-				<tr class="<?=implode(" ",$classes?>">
+				<tr class="<?=implode(" ",$classes)?>">
 					<td>
 						<?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?>
 					</td>

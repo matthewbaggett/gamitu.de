@@ -124,7 +124,6 @@ class UserController extends BaseController{
 		foreach($deltas as $delta){
 			$this->_view->deltas[$delta->pid] = $delta;
 		}
-		var_dump($this->_view->deltas);exit;
 	}
 	
 	public function CronAction(){
