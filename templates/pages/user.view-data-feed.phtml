@@ -12,10 +12,22 @@
 		<tbody>
 			<?php foreach($this->feed as $position):?>
 				<tr>
-					<td><?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?></td>
-					<td><?=($position->get_timestamp_ms() - $prev->get_timestamp_ms())?></td>
-					<td><?=$position->get_latitude();?>,<?=$position->get_longitude();?></td>
-					<td><?=($position->get_latitude() - $prev->get_latitude());?>,<?=($position->get_longitude() - $prev->get_longitude());?></td>
+					<td>
+						<?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?>
+					</td>
+					<td>
+						<?php if($prev):?>
+							<?=($position->get_timestamp_ms() - $prev->get_timestamp_ms())?>
+						<?php endif; ?>
+					</td>
+					<td>
+						<?=$position->get_latitude();?>,<?=$position->get_longitude();?>
+					</td>
+					<td>
+						<?php if($prev):?>
+							<?=($position->get_latitude() - $prev->get_latitude());?>,<?=($position->get_longitude() - $prev->get_longitude());?>
+						<?php endif; ?>
+					</td>
 				</tr>
 				<?php $prev = $position;?>
 			<?php endforeach; ?>
