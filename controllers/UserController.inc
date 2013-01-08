@@ -108,9 +108,10 @@ class UserController extends BaseController{
 									->exec();
 		
 		// Get the deltas
-		$db_name = db::get_database_name();
+		
+		$db_name = \tcore\db::get_database_name();
 		$sql_select = "SELECT * FROM {$db_name}.points_delta WHERE `uid` = {$this->_view->user->get_uid()};";
-		$deltas = db::get_instance()->query($sql_select)->fetchAll();
+		$deltas = \tcore\db::get_instance()->query($sql_select)->fetchAll();
 		$this->_view->deltas = $deltas;
 		var_dump($deltas);exit;
 	}
