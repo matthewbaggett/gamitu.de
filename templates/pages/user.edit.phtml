@@ -12,8 +12,8 @@
 			<p><a class="btn" href="#">View details &raquo;</a></p>
 		</div>
 		<div class="span4">
-			<h2>Heading</h2>
-			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			<h2>Last Location</h2>
+			<p>We last saw you near <?=$this->user->get_last_location() instanceof point?$this->user->get_last_location()->get_town():'The Moon';?></p>
 			<p><a class="btn" href="#">View details &raquo;</a></p>
 	 	</div>
 		<div class="span4">

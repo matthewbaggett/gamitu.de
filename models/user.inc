@@ -163,4 +163,13 @@ class user extends model{
 			}
 		}
 	}
+	
+	public function get_last_location(){
+		$location = point::factory()
+						->search()
+							->where('uid', $this->get_uid())
+							->order('timestamp_ms','DESC')
+							->execOne();
+		return $location;
+	}
 }

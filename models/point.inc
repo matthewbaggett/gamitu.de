@@ -30,4 +30,13 @@ class point extends model{
 			return TRUE;
 		}
 	}
+	
+	public function get_town(){
+		$geocode = eden('google')
+					->maps(user::get_current_user()->get_access_token())
+						->geocoding()
+							->setLatLng($this->latitude,$this->longitude)
+							->getResponse();
+		var_dump($geocode);exit;
+	}
 }
