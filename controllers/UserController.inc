@@ -84,7 +84,7 @@ class UserController extends BaseController{
 	}
 	
 	public function EditAction(){
-		
+		$this->_view->user = user::get_current_user();
 	}
 	
 	public function LogoutAction(){
