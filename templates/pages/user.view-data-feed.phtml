@@ -26,7 +26,9 @@
 						<?=$delta->delta_timestamp_ms?round($delta->delta_timestamp_ms):'N/A'?> sec
 					</td>
 					<td>
-						<?=$position->get_latitude();?>,<?=$position->get_longitude();?>
+						<a href="/map/view-location?ll=<?=$position->get_latitude();?>,<?=$position->get_longitude();?>">
+							<?=$position->get_latitude();?>,<?=$position->get_longitude();?>
+						</a>
 					</td>
 					<td>
 						<?=isset($delta->delta_lat)?$delta->delta_lat:'0'?>,

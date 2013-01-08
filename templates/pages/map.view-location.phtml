@@ -1,0 +1,23 @@
+<div class="container">
+
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	
+	<script type="text/javascript">
+      jQuery(document).ready(function(){
+          var mapOptions = {
+                  center: new google.maps.LatLng(<?=$this->lat?>,<?=$this->long?>),
+                  zoom: 8,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+      });
+    </script>
+    
+     <div id="map_canvas" style="width:100%; height:100%"></div>
+	<hr>
+
+	<footer>
+		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
+	</footer>
+
+</div> <!-- /container -->
