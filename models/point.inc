@@ -31,13 +31,23 @@ class point extends model{
 		}
 	}
 	
-	public function get_town(){
+	private function _reverse_geolocate(){
 		$geocode = eden('google')
-					->maps(user::get_current_user()->get_access_token())
-						->geocoding()
-							->setLatLng($this->latitude,$this->longitude)
-							->setSensor('true')
-							->getResponse();
-		var_dump($geocode);exit;
+			->maps(user::get_current_user()->get_access_token())
+			->geocoding()
+				->setLatLng($this->latitude,$this->longitude)
+				->setSensor('true')
+				->getResponse();
+		return $geocode;
+	}
+	
+	public function get_town(){
+		$geocode = $this->_reverse_geolocate();	
+		foreach($geocode['results'][0]['address_components'] as $address_component){
+			if($address_component['types'][0] == 'postal_town'){
+				return $address_component['types'][0]['long_name'];
+			}
+		}
+		return "Unknown Town";
 	}
 }
