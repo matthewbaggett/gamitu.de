@@ -110,10 +110,21 @@ class UserController extends BaseController{
 		// Get the deltas
 		
 		$db_name = \tcore\db::get_database_name();
-		$sql_select = "SELECT * FROM {$db_name}.points_delta WHERE `uid` = {$this->_view->user->get_uid()};";
+		$sql_select = "
+				SELECT 
+					pid,
+					delta_lat, 
+					delta_long, 
+					delta_latlong,
+					delta_timestamp_ms
+				FROM {$db_name}.points_delta 
+				WHERE 
+					`uid` = {$this->_view->user->get_uid()};";
 		$deltas = \tcore\db::get_instance()->query($sql_select)->fetchAll();
-		$this->_view->deltas = $deltas;
-		var_dump($deltas);exit;
+		foreach($deltas as $delta){
+			$this->_view->deltas[$delta['pid']] = $delta;
+		}
+		var_dump($this->_view->deltas);exit;
 	}
 	
 	public function CronAction(){
