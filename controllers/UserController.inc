@@ -3,11 +3,11 @@
 class UserController extends BaseController{
 	public function RegisterGoogleAction(){
 		$scopes = array(
-				'https://www.googleapis.com/auth/userinfo.profile',
-				"https://www.googleapis.com/auth/latitude.all.best", 
-				"https://www.googleapis.com/auth/latitude.all.city", 
-				"https://www.googleapis.com/auth/latitude.current.best", 
-				"https://www.googleapis.com/auth/latitude.current.city"
+				'userinfo',
+				'latitude_all_best', 
+				'latitude_all_city', 
+				'latitude_current_best', 
+				'latitude_current_city'
 		);
 		$auth = eden('google')
 			->auth(
