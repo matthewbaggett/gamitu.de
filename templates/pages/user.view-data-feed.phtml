@@ -1,17 +1,25 @@
 <div class="container">
 
 	<table class="table table-bordered table-compact">
-		<tr>
-			<th>Latitude</th>
-			<th>Longitude</th>
-			<th>Date &amp; Time</th>
-		<?php foreach($this->feed as $position):?>
+		<thead>
 			<tr>
-				<td><?=$position->get_latitude();?></td>
-				<td><?=$position->get_longitude();?></td>
-				<td><?=$position->get_timestamp_ms();?></td>
+				<th>Date &amp; Time</th>
+				<th>Delta</th>
+				<th>Latitude &amp; Longitude</th>
+				<th>Delta</th>
 			</tr>
-		<?php endforeach; ?>
+		</thead>
+		<tbody>
+			<?php foreach($this->feed as $position):?>
+				<tr>
+					<td><?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?></td>
+					<td><?=($position->get_timestamp_ms() - $prev->get_timestamp_ms())?></td>
+					<td><?=$position->get_latitude();?>,<?=$position->get_longitude();?></td>
+					<td><?=($position->get_latitude() - $prev->get_latitude());?>,<?=($position->get_longitude() - $prev->get_longitude());?></td>
+				</tr>
+				<?php $prev = $position;?>
+			<?php endforeach; ?>
+		</tbody>
 	</table>
 	
 	<hr>
