@@ -7,6 +7,7 @@
 				<th>Delta</th>
 				<th>Latitude &amp; Longitude</th>
 				<th>Delta</th>
+				<th>Speed (mph/kph)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,6 +35,7 @@
 						<?=isset($delta->delta_lat)?$delta->delta_lat:'0'?>,
 						<?=isset($delta->delta_long)?$delta->delta_long:'0'?>
 					</td>
+					<td><?=$delta->miles_per_hour?>/<?=$delta->kilometers_per_hour?></td>
 				</tr>
 				<?php $prev = $position;?>
 			<?php endforeach; ?>

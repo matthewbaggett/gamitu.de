@@ -37,7 +37,7 @@ class point extends model{
 		$geocode = eden('google')
 			->maps(user::get_current_user()->get_access_token())
 			->geocoding()
-				->setLatLng($this->latitude,$this->longitude)
+				->setLatLng($this->latitude, $this->longitude)
 				->setSensor('true')
 				->getResponse();
 		return $geocode;
