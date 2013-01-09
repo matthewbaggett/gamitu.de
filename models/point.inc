@@ -47,6 +47,7 @@ class point extends model{
 		if(!$this->geolocation){
 			$geocode = $this->_reverse_geolocate();
 			$this->set_geolocation(json_encode($geocode));
+			$this->save();
 		}
 		return json_decode(parent::get_geolocation(), true);
 	}
