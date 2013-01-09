@@ -43,8 +43,16 @@ class point extends model{
 		return $geocode;
 	}
 	
+	public function get_geolocation(){
+		if(!$this->geolocation){
+			$geocode = $this->_reverse_geolocate();
+			$this->set_geolocation(json_encode($geocode));
+		}
+		return json_decode(parent::get_geolocation(), true);
+	}
+	
 	public function get_town(){
-		$geocode = $this->_reverse_geolocate();	
+		$geocode = $this->get_geolocation();
 		foreach($geocode['results'][0]['address_components'] as $address_component){
 			if($address_component['types'][0] == 'postal_town'){
 				return $address_component['long_name'];
