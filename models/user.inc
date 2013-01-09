@@ -154,12 +154,13 @@ class user extends model{
 			$oNewPoint->set_longitude($place->getLongitude());
 			$oNewPoint->set_uid($this->get_uid());
 			$human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
-			echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
+			
 		
 			if($oNewPoint->save()){
+				echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
 				echo "Saved as {$oNewPoint->get_pid()}\n";
 			}else{
-				echo "Ignored\n";
+				//echo "Ignored\n";
 			}
 		}
 	}
