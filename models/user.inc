@@ -157,7 +157,7 @@ class user extends model{
 			echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
 		
 			if($oNewPoint->save()){
-				echo "Saved\n";
+				echo "Saved as {$oNewPoint->get_pid()}\n";
 			}else{
 				echo "Ignored\n";
 			}
