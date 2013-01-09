@@ -155,13 +155,17 @@ class user extends model{
 			$oNewPoint->set_uid($this->get_uid());
 			$human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
 			
-		
+			$added = 0;
+			$ignored = 0;
 			if($oNewPoint->save()){
 				echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
 				echo "Saved as {$oNewPoint->get_pid()}\n";
+				$added++;
 			}else{
+				$ignored++;
 				//echo "Ignored\n";
 			}
+			echo "Added {$added}, ignored {$ignored}\n\n";
 		}
 	}
 	
