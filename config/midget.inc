@@ -1,8 +1,8 @@
 <?php 
 \tcore\db::config(
 		"localhost", //host
-		"gamitude",	//user
-		"2sUN13984x89e46", //pass
+		"root",	//user
+		"", //pass
 		"gamitude" //db
 );
 
