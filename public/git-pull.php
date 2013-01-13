@@ -17,7 +17,7 @@ ob_start();
 		'git status',
 		'git submodule init',
 		'git submodule sync',
-		'git submodule update --recursive',
+		'git submodule update',
 		'git submodule status',
 		'git submodule foreach git pull origin master'
 	);
