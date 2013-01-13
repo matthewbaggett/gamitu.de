@@ -12,13 +12,14 @@ ob_start();
 	$commands = array(
 		'echo $PWD',
 		'whoami',
+		'hostname',
 		'git pull',
 		'git status',
 		'git submodule init',
 		'git submodule sync',
 		'git submodule update --recursive',
 		'git submodule status',
-		'git submodule -q foreach git pull -q origin master'
+		'git submodule foreach git pull origin master'
 	);
 
 	// Run the commands for output
