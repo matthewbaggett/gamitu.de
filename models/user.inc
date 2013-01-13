@@ -8,6 +8,8 @@ class user extends model{
 	protected $password;
 	protected $email;
 	protected $access_token;
+	protected $access_token_expiry;
+	protected $_access_token_expiry_type = self::TYPE_DATE;
 	protected $google_id;
 	protected $firstname;
 	protected $surname;

@@ -13,7 +13,7 @@ class UserController extends BaseController{
 			->auth(
 				GOOGLE_CLIENT_ID, 
 				GOOGLE_CLIENT_SECRET, 
-				'http://gamitu.de/user/register-google', 
+				GOOGLE_LOGIN_REDIRECT, 
 				GOOGLE_API_KEY);
 		
 		
@@ -29,7 +29,8 @@ class UserController extends BaseController{
 		
 		if(isset($_GET['code'])) {
 			//save it to session
-			$access = $auth->getAccess($_GET['code']);
+			$access = $auth->forOffline()->getAccess($_GET['code']);
+			
 			$userinfo = eden('google')->userinfo($access['access_token']);
 			$profile = $userinfo->me();
 			
@@ -39,8 +40,10 @@ class UserController extends BaseController{
 				$log_in_success->set_access_token($access['access_token'])->save();
 				header("Location: /user/edit");
 			}else{
+				$token_expire = time() + $access['expires_in'];
 				$oUser = user::factory()
 					->set_access_token($access['access_token'])
+					->set_access_token_expiry($token_expire)
 					->set_firstname($profile['given_name'])
 					->set_surname($profile['family_name'])
 					->set_link($profile['link'])
@@ -137,6 +140,17 @@ class UserController extends BaseController{
 		$users = user::get_all_users();
 		foreach($users as $user){
 			echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
+			
+			// Update the users refresh token
+			/*try{
+				echo "Attempting to refresh Google Auth token:";
+				$user->refresh_token();
+				echo "OKAY";
+			}catch(Exception $e){
+				echo $e->getMessage()."\n\n";
+			}*/
+			
+			// Get their locations
 			try{
 				$user->update_latitude_locations();
 			}catch(Exception $e){
