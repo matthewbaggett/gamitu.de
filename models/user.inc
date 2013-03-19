@@ -106,6 +106,9 @@ class user extends model{
 		
 		// Process the places
 		$this->_process_places($places);
+		
+		// Return the number of found places.
+		return count($places);
 	}
 
 	static public function get_all_users(){

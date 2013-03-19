@@ -98,8 +98,9 @@ class UserController extends BaseController{
 	
 	public function UpdateLatitudeFeedAction(){
 		$this->_view->user = user::get_current_user();
-		$this->_view->user->update_latitude_locations();
-		//header("Location: /user/edit");
+		$found_places = $this->_view->user->update_latitude_locations();
+		\tcore\tcore::set_message("Added {$found_places} locations");
+		header("Location: {$_SERVER['HTTP_REFERER']}");
 		exit;
 	}
 	
