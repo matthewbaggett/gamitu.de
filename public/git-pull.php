@@ -14,19 +14,22 @@ $commands = array(
     'git pull',
 	'git status',
 	
+	'rm lib/tcore -Rfv',
+	'mkdir lib/tcore -p',
     'cd lib/tcore',
-	'rm -Rf * .git*',
-    'git clone git@github.com:geusebio/tcore.git .',
+    'git clone git@github.com:geusebio/tcore.git . --verbose',
     'cd ../../',
 	
+    'rm lib/eden -Rfv',
+	'mkdir lib/eden -p',
     'cd lib/eden',
-    'rm -Rf * .git*',
-    'git clone git@github.com:geusebio/eden.git .',
+    'git clone git@github.com:geusebio/eden.git . --verbose',
     'cd ../../',
 	
+    'rm lib/firephp -Rfv',
+	'mkdir lib/firephp -p',
     'cd lib/firephp',
-    'rm -Rf * .git*',
-    'git clone git://github.com/firephp/firephp-core.git .',
+    'git clone git://github.com/firephp/firephp-core.git . --verbose',
     'cd ../../',
 );
 
