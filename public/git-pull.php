@@ -16,15 +16,15 @@ $commands = array(
 	
 	'rm lib/tcore -Rfv',
 	'mkdir lib/tcore -p',
-    'cd lib/tcore; pwd; git clone git@github.com:geusebio/tcore.git .',
+    'cd lib/tcore; pwd; git clone git@github.com:geusebio/tcore.git . --verbose',
 	
     'rm lib/eden -Rfv',
 	'mkdir lib/eden -p',
-    'cd lib/eden; pwd; git clone git@github.com:geusebio/eden.git .',
+    'cd lib/eden; pwd; git clone git@github.com:geusebio/eden.git . --verbose',
 	
     'rm lib/firephp -Rfv',
 	'mkdir lib/firephp -p',
-    'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git .',
+    'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git . --verbose',
 );
 
 // Run the commands for output
