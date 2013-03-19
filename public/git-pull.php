@@ -13,6 +13,18 @@ $commands = array(
     'git status',
     'git pull',
 	'git status',
+	
+    'cd lib/tcore',
+    'git pull',
+    'cd ../../',
+	
+    'cd lib/eden',
+    'git pull',
+    'cd ../../',
+	
+    'cd lib/firephp',
+    'git pull',
+    'cd ../../',
 );
 
 // Run the commands for output
