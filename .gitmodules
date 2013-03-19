@@ -1,9 +1,0 @@
-[submodule "lib/firephp"]
-	path = lib/firephp
-	url = git://github.com/firephp/firephp-core.git
-[submodule "lib/tcore"]
-	path = lib/tcore
-	url = git@github.com:geusebio/tcore.git
-[submodule "lib/eden"]
-	path = lib/eden
-	url = git@github.com:geusebio/eden.git
