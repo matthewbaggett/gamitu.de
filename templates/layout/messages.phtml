@@ -1,4 +1,4 @@
-<?php foreach(\tcore\tcore::get_messages() as $message): ?>
+<?php foreach((array) \tcore\tcore::get_messages() as $message): ?>
 	<div class="alert alert-<?php echo $message->type?>">
 		<?php echo $message->message; ?>
 	</div>

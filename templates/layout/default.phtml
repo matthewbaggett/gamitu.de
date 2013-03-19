@@ -38,8 +38,11 @@
 	<body>
 
 		<?php require_once("navigation.phtml"); ?>
-		<?php require_once("messages.phtml"); ?>
-		<?php $this->render_page(); ?>
+		
+		<div class="container">
+			<?php require_once("messages.phtml"); ?>
+			<?php $this->render_page(); ?>
+		</div>
 
 		<!-- Le javascript
 		================================================== -->
