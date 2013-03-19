@@ -17,19 +17,19 @@ $commands = array(
 	'rm lib/tcore -Rfv',
 	'mkdir lib/tcore -p',
     'cd lib/tcore',
-    'git clone git@github.com:geusebio/tcore.git . --verbose',
+    'git clone git@github.com:geusebio/tcore.git .',
     'cd ../../',
 	
     'rm lib/eden -Rfv',
 	'mkdir lib/eden -p',
     'cd lib/eden',
-    'git clone git@github.com:geusebio/eden.git . --verbose',
+    'git clone git@github.com:geusebio/eden.git .',
     'cd ../../',
 	
     'rm lib/firephp -Rfv',
 	'mkdir lib/firephp -p',
     'cd lib/firephp',
-    'git clone git://github.com/firephp/firephp-core.git . --verbose',
+    'git clone git://github.com/firephp/firephp-core.git .',
     'cd ../../',
 );
 
