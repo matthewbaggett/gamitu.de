@@ -1,38 +1,30 @@
 <?php
+if($_REQUEST['password'] !== 'kU4EdRaw'){
+    die("Wrong password");
+}
+chdir("../");
 ob_start();
-	/**
-	 * GIT DEPLOYMENT SCRIPT
-	 *
-	 * Used for automatically deploying websites via github or bitbucket, more deets here:
-	 *
-	 *		https://gist.github.com/1809044
-	 */
-	chdir("../");
-	// The commands
-	$commands = array(
-		'echo $PWD',
-		'whoami',
-		'hostname',
-		'git pull',
-		'git status',
-		'git submodule init',
-		'git submodule sync',
-		'git submodule update',
-		'git submodule status',
-		'git submodule foreach git pull origin master'
-	);
 
-	// Run the commands for output
-	$output = '';
-	foreach($commands AS $command){
-		// Run it
-		$tmp = shell_exec($command);
-		// Output
-		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
-		$output .= htmlentities(trim($tmp)) . "\n";
-	}
+// The commands
+$commands = array(
+	'echo $PWD',
+	'whoami',
+	'hostname',
+    'git status',
+    'git pull',
+	'git status',
+);
 
-	// Make it pretty for manual user access (and why not?)
+// Run the commands for output
+$output = '';
+foreach($commands AS $command){
+	// Run it
+	$tmp = shell_exec($command);
+	// Output
+	$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
+	$output .= htmlentities(trim($tmp)) . "\n";
+}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -57,9 +49,18 @@ $output = ob_get_contents();
 ob_end_clean();
 
 echo $output; 
+
+$to = "matthew@baggett.me";
+// To send HTML mail, the Content-type header must be set
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'To: ' . $to . "\r\n";
+$headers .= 'From: GitHub AutoDeploy on ' . gethostname() . " <service@gamitu.de>\r\n";
+
 mail(
-"matthew@baggett.me",
-"Deployment on ".gethostname()." at " . date("d/m/Y H:i:s"),
-$output
+    $to,
+    "Deployment on ".gethostname()." at " . date("d/m/Y H:i:s"),
+    $output, 
+    $headers
 );
 ?>
