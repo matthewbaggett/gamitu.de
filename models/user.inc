@@ -105,10 +105,7 @@ class user extends model{
 		echo " (found ".count($places).")\n";
 		
 		// Process the places
-		$this->_process_places($places);
-		
-		// Return the number of found places.
-		return count($places);
+		return $this->_process_places($places);
 	}
 
 	static public function get_all_users(){
@@ -174,6 +171,7 @@ class user extends model{
 			
 		}
 		echo "Added {$added}, ignored {$ignored}\n\n";
+		return array($added, $ignored);
 	}
 	
 	public function get_last_location(){
