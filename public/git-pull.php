@@ -15,15 +15,18 @@ $commands = array(
 	'git status',
 	
     'cd lib/tcore',
-    'git pull',
+	'rm -Rf * .git*',
+    'git clone git@github.com:geusebio/tcore.git .',
     'cd ../../',
 	
     'cd lib/eden',
-    'git pull',
+    'rm -Rf * .git*',
+    'git clone git@github.com:geusebio/eden.git .',
     'cd ../../',
 	
     'cd lib/firephp',
-    'git pull',
+    'rm -Rf * .git*',
+    'git clone git://github.com/firephp/firephp-core.git .',
     'cd ../../',
 );
 
