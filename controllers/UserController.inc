@@ -114,7 +114,7 @@ class UserController extends BaseController{
 		// Get the deltas
 		
 		$db_name = \tcore\db::get_database_name();
-		$sql_select = "
+		$deltas_select = "
 				SELECT 
 					pid,
 					delta_lat, 
@@ -125,7 +125,8 @@ class UserController extends BaseController{
 				FROM {$db_name}.points_delta 
 				WHERE 
 					`uid` = {$this->_view->user->get_uid()};";
-		$deltas_result = \tcore\db::get_instance()->query($sql_select);
+		echo $deltas_select;
+		$deltas_result = \tcore\db::get_instance()->query($deltas_select);
 		var_dump($deltas_result);
 		$deltas = $deltas_result->fetchAll();
 		$sec_per_hour = 60 * 60;
