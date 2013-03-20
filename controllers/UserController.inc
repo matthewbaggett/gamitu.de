@@ -112,8 +112,6 @@ class UserController extends BaseController{
 									->where('uid', $this->_view->user->get_uid())
 									->exec();
 
-		var_dump($this->_view->feed);
-		
 		// Get the deltas
 		$db_name = \tcore\db::get_database_name();
 		$deltas_select = "
