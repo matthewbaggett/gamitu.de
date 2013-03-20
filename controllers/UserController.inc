@@ -119,7 +119,7 @@ class UserController extends BaseController{
 					pid,
 					lat_delta, 
 					long_delta, 
-					time_delta,
+					time_delta
 				FROM {$db_name}.points_deltas  
 				WHERE 
 					`uid` = {$this->_view->user->get_uid()};
