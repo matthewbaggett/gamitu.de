@@ -13,6 +13,8 @@ class point extends model{
 	protected $hash;
 	protected $geolocation;
 	protected $_geolocation_type = model::TYPE_BLOB;
+	protected $pid_preceding;
+	protected $_pid_preceding_type = model::TYPE_INT;
 	
 	public function generate_hash(){
 		$this->set_hash(hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms))));
@@ -60,5 +62,18 @@ class point extends model{
 			}
 		}
 		return "Unknown Town";
+	}
+	
+	static public function recalculate_point_order(){
+		$orphan_points = point::search()->where('pid_preceding','')->exec();
+		foreach($orphan_points as $orphan_point){
+			$preceding_point = point::search()
+				->where('timestamp_ms', $orphan_point->get_timestamp_ms(), "<")
+				->order('timestamp_ms','DESC')
+				->execOne();
+			$orphan_point
+				->set_pid_preceding($preceding_point->get_pid())
+				->save();
+		}
 	}
 }

@@ -106,13 +106,17 @@ class UserController extends BaseController{
 	
 	public function ViewDataFeedAction(){
 		$this->_view->user = user::get_current_user();
+		point::recalculate_point_order();
 		$this->_view->feed = point::factory()
 								->search()
 									->where('uid',$this->_view->user->get_uid())
 									->exec();
-		
+
+		var_dump($this->_view->feed);
+		exit;
 		// Get the deltas
 		
+	
 		$db_name = \tcore\db::get_database_name();
 		$deltas_select = "
 				SELECT 
