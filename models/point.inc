@@ -22,16 +22,18 @@ class point extends model{
 	
 	public function save($force = false){
 		$this->generate_hash();
+		if($force){
+			return parent::save();
+		}
 		$existing_match = self::factory()
 			->search()
 			->where('hash', $this->get_hash())
 			->execOne();
 		
-		if($existing_match && $force == false){
+		if($existing_match){
 			return FALSE;
 		}else{
-			parent::save();
-			return TRUE;
+			return parent::save();
 		}
 	}
 	
