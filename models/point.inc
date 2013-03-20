@@ -72,9 +72,11 @@ class point extends model{
 				->where('uid',$orphan_point->get_uid())
 				->order('timestamp_ms','DESC')
 				->execOne();
-			$orphan_point
-				->set_pid_preceding($preceding_point->get_pid())
-				->save();
+			if($preceding_point){
+				$orphan_point
+					->set_pid_preceding($preceding_point->get_pid())
+					->save();
+			}
 		}
 	}
 }
