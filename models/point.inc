@@ -65,18 +65,24 @@ class point extends model{
 	}
 	
 	static public function recalculate_point_order(){
-		$orphan_points = point::search()->where('pid_preceding','')->exec();
+		$orphan_points = point::search()->where('pid_preceding', '')->exec();
+		
 		foreach($orphan_points as $orphan_point){
+			echo "Orphan: {$orphan_point->get_pid()} ";
 			$preceding_point = point::search()
 				->where('timestamp_ms', $orphan_point->get_timestamp_ms(), "<")
-				->where('uid',$orphan_point->get_uid())
-				->order('timestamp_ms','DESC')
+				->where('uid', $orphan_point->get_uid())
+				->order('timestamp_ms', 'DESC')
 				->execOne();
 			if($preceding_point){
+				echo " Preceeded by {$preceding_point->get_pid()}\n";
 				$orphan_point
 					->set_pid_preceding($preceding_point->get_pid())
 					->save();
+			}else{
+				echo " NOEP.\n";
 			}
 		}
+		exit;
 	}
 }
