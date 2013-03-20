@@ -20,14 +20,14 @@ class point extends model{
 		$this->set_hash(hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms))));
 	}
 	
-	public function save(){
+	public function save($force = false){
 		$this->generate_hash();
 		$existing_match = self::factory()
 			->search()
 			->where('hash', $this->get_hash())
 			->execOne();
 		
-		if($existing_match){
+		if($existing_match && $force == false){
 			return FALSE;
 		}else{
 			parent::save();
@@ -77,7 +77,7 @@ class point extends model{
 			if($preceding_point){
 				echo " Preceeded by {$preceding_point->get_pid()}\n";
 				$orphan_point->set_pid_preceding($preceding_point->get_pid());
-				$orphan_point->save();
+				$orphan_point->save(true);
 			}else{
 				echo " NOEP.\n";
 			}
