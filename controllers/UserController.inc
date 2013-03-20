@@ -113,26 +113,26 @@ class UserController extends BaseController{
 									->exec();
 
 		var_dump($this->_view->feed);
-		exit;
-		// Get the deltas
 		
-	
+		// Get the deltas
 		$db_name = \tcore\db::get_database_name();
 		$deltas_select = "
 				SELECT 
 					pid,
-					delta_lat, 
-					delta_long, 
-					delta_latlong,
-					delta_timestamp_ms,
-					delta_distance
-				FROM {$db_name}.points_delta 
+					lat_delta, 
+					long_delta, 
+					time_delta,
+				FROM {$db_name}.points_deltas  
 				WHERE 
-					`uid` = {$this->_view->user->get_uid()};";
+					`uid` = {$this->_view->user->get_uid()};
+		";
+		
 		echo $deltas_select;
+		
 		$deltas_result = \tcore\db::get_instance()->query($deltas_select);
 		var_dump($deltas_result);
 		$deltas = $deltas_result->fetchAll();
+		var_dump($deltas);
 		$sec_per_hour = 60 * 60;
 		foreach($deltas as $delta){
 			$delta->delta_distance_miles 			= $delta->delta_distance * 3959;
