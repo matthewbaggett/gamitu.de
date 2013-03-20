@@ -116,7 +116,7 @@ class UserController extends BaseController{
 		$db_name = \tcore\db::get_database_name();
 		$deltas_select = "
 				SELECT 
-					pid,
+					pid1 as pid,
 					lat_delta, 
 					long_delta, 
 					time_delta
