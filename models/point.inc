@@ -76,9 +76,8 @@ class point extends model{
 				->execOne();
 			if($preceding_point){
 				echo " Preceeded by {$preceding_point->get_pid()}\n";
-				$orphan_point
-					->set_pid_preceding($preceding_point->get_pid())
-					->save();
+				$orphan_point->set_pid_preceding($preceding_point->get_pid());
+				$orphan_point->save();
 			}else{
 				echo " NOEP.\n";
 			}
