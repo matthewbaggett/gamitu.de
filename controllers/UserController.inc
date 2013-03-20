@@ -109,7 +109,7 @@ class UserController extends BaseController{
 		point::recalculate_point_order();
 		$this->_view->feed = point::factory()
 								->search()
-									->where('uid',$this->_view->user->get_uid())
+									->where('uid', $this->_view->user->get_uid())
 									->exec();
 
 		var_dump($this->_view->feed);

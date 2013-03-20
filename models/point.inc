@@ -69,6 +69,7 @@ class point extends model{
 		foreach($orphan_points as $orphan_point){
 			$preceding_point = point::search()
 				->where('timestamp_ms', $orphan_point->get_timestamp_ms(), "<")
+				->where('uid',$orphan_point->get_uid())
 				->order('timestamp_ms','DESC')
 				->execOne();
 			$orphan_point
