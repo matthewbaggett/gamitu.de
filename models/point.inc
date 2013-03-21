@@ -23,6 +23,7 @@ class point extends model{
     
     public function already_exists(){
         $matching_point = point::search()
+            ->where('uid', $this->uid)
             ->where('latitude', $this->latitude)
             ->where('longitude', $this->longitude)
             ->where('timestamp_ms', $this->timestamp_ms)
