@@ -21,6 +21,8 @@ class user extends model{
 	protected $birthday;
 	protected $_birthday_type = self::TYPE_DATE;
 	protected $locale;
+    
+    const MAX_LATITUDE_LOCATIONS_PER_REQUEST = 1000;
 	
 	public function login(){
 		$_SESSION['user'] = serialize($this);
@@ -94,7 +96,7 @@ class user extends model{
 		echo " > Get Google Latitude History object\n";
 		$history = $latitude->history();
 		$history->setGranularity('best');
-		$history->setMaxResults(50);
+		$history->setMaxResults(user::MAX_LATITUDE_LOCATIONS_PER_REQUEST);
 			
 		// Request a list of places from Google Latitude History
 		echo " > Requesting places";
@@ -123,7 +125,7 @@ class user extends model{
 		// Create the Google Latitude History access object
 		$history = $latitude->history();
 		$history->setGranularity('best');
-		$history->setMaxResults(50);
+		$history->setMaxResults(user::MAX_LATITUDE_LOCATIONS_PER_REQUEST);
 		
 		// Work out our starting timestamp
 		$time_ms_two_weeks_ago = strtotime("two weeks ago") * 1000;
