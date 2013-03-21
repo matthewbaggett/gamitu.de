@@ -150,15 +150,6 @@ class UserController extends BaseController{
 		foreach($users as $user){
 			echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
 			
-			// Update the users refresh token
-			/*try{
-				echo "Attempting to refresh Google Auth token:";
-				$user->refresh_token();
-				echo "OKAY";
-			}catch(Exception $e){
-				echo $e->getMessage()."\n\n";
-			}*/
-			
 			// Get their locations
 			try{
 				$user->update_latitude_locations();

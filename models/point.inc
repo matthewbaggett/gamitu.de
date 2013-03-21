@@ -19,22 +19,20 @@ class point extends model{
 	public function generate_hash(){
 		$this->set_hash(hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms))));
 	}
-	
-	public function save($force = false){
-		$this->generate_hash();
-		if($force){
-			return parent::save();
-		}
-		$existing_match = self::factory()
-			->search()
+    
+    /**
+     * Override the default _is_dirty() to decide if the hash matches (IE: Not dirty) first.
+     */
+    protected function _is_dirty(){
+    	$this->generate_hash();
+        $existing_match = self::factory()
+    		->search()
 			->where('hash', $this->get_hash())
 			->execOne();
-		
-		if($existing_match){
-			return FALSE;
-		}else{
-			return parent::save();
-		}
+        if($existing_match){
+            return FALSE;
+        }
+        return parent::_is_dirty();
 	}
 	
 	private function _reverse_geolocate(){
