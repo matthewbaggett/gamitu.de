@@ -17,9 +17,8 @@ class point extends model{
 	protected $_pid_preceding_type = model::TYPE_INT;
 	
 	public function generate_hash(){
-        $hash = hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms)));
-		$this->set_hash($hash);
-        return $hash;
+        $this->hash = hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms)));
+        return $this->hash;
 	}
     
     public function already_exists(){
@@ -36,6 +35,7 @@ class point extends model{
     }
     
     public function save(){
+        $this->generate_hash();
         if($this->already_exists()){
             return FALSE;
         }else{
