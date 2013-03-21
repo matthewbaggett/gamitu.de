@@ -1,5 +1,5 @@
 <?php
-if($_REQUEST['password'] !== 'kU4EdRaw' && PHP_SAPI !== 'cli'){
+if((!isset($_REQUEST['password']) || $_REQUEST['password'] !== 'kU4EdRaw') && PHP_SAPI !== 'cli'){
     die("Wrong password");
 }
 chdir("../");
