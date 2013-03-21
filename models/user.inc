@@ -157,7 +157,7 @@ class user extends model{
 			$human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
 			
 			if(!$oNewPoint->already_exists()){
-                $oNewPoint->save()
+                $oNewPoint->save();
 				echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
 				echo "Saved as {$oNewPoint->get_pid()}\n";
 				$added++;
