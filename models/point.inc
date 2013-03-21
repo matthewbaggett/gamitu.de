@@ -17,19 +17,21 @@ class point extends model{
 	protected $_pid_preceding_type = model::TYPE_INT;
 	
 	public function generate_hash(){
-		$this->set_hash(hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms))));
+        $hash = hash("sha1", implode("::",array($this->uid,$this->latitude,$this->longitude,$this->timestamp_ms)));
+		$this->set_hash($hash);
+        return $hash;
 	}
     
     /**
      * Override the default _is_dirty() to decide if the hash matches (IE: Not dirty) first.
      */
     protected function _is_dirty(){
-    	$this->generate_hash();
+    	$hash = $this->generate_hash();
         $existing_match = self::factory()
     		->search()
-			->where('hash', $this->get_hash())
+			->where('hash', $hash)
 			->execOne();
-        echo "Hash: {$this->get_hash()}\n";
+        echo "Hash: {$hash}\n";
         if($existing_match){
             return FALSE;
         }
