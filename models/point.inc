@@ -36,7 +36,7 @@ class point extends model{
     }
     
     public function save(){
-        if($this->already_exists(){
+        if($this->already_exists()){
             return FALSE;
         }else{
             return parent::save();  
