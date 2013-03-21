@@ -1,5 +1,5 @@
 <?php
-if($_REQUEST['password'] !== 'kU4EdRaw'){
+if($_REQUEST['password'] !== 'kU4EdRaw' && PHP_SAPI !== 'cli'){
     die("Wrong password");
 }
 chdir("../");
@@ -37,6 +37,7 @@ foreach($commands AS $command){
 	$output .= htmlentities(trim($tmp)) . "\n";
 }
 
+if(PHP_SAPI !== 'cli'){
 ?>
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -57,10 +58,10 @@ foreach($commands AS $command){
 </body>
 </html>
 <?php
-$output = ob_get_contents();
-ob_end_clean();
-
-echo $output; 
+    $output = ob_get_contents();
+    ob_end_clean();
+}
+echo $output;
 
 $to = "matthew@baggett.me";
 // To send HTML mail, the Content-type header must be set
