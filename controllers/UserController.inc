@@ -15,6 +15,8 @@ class UserController extends BaseController{
 				GOOGLE_CLIENT_SECRET, 
 				GOOGLE_LOGIN_REDIRECT, 
 				GOOGLE_API_KEY);
+                
+        $auth->forOffline();
 		
 		
 		//if no code and no session
@@ -29,7 +31,7 @@ class UserController extends BaseController{
 		
 		if(isset($_GET['code'])) {
 			//save it to session
-			$access = $auth->forOffline()->getAccess($_GET['code']);
+			$access = $auth->getAccess($_GET['code']);
 			
 			$userinfo = eden('google')->userinfo($access['access_token']);
 			$profile = $userinfo->me();
