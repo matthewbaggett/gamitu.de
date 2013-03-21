@@ -22,23 +22,28 @@ class point extends model{
         return $hash;
 	}
     
-    /**
-     * Override the default _is_dirty() to decide if the hash matches (IE: Not dirty) first.
-     */
-    protected function _is_dirty(){
-    	$hash = $this->generate_hash();
-        $existing_match = self::factory()
-    		->search()
-			->where('hash', $hash)
-			->execOne();
-        echo "Hash: {$hash}\n";
-        if($existing_match){
+    public function already_exists(){
+        $matching_point = new point::search()
+            ->where('latitude', $this->latitude)
+            ->where('longitude', $this->longitude
+            ->where('timestamp_ms', $this->timestamp_ms)
+            ->execOne();
+        if($matching_point){
+            return TRUE;
+        }else{
             return FALSE;
         }
-        return parent::_is_dirty();
-	}
-	
-	private function _reverse_geolocate(){
+    }
+    
+    public function save(){
+        if($this->already_exists(){
+            return FALSE;
+        }else{
+            return parent::save();  
+        }
+    }
+    
+    private function _reverse_geolocate(){
 		$geocode = eden('google')
 			->maps(user::get_current_user()->get_access_token())
 			->geocoding()

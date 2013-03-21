@@ -94,7 +94,7 @@ class user extends model{
 		echo " > Get Google Latitude History object\n";
 		$history = $latitude->history();
 		$history->setGranularity('best');
-		$history->setMaxResults(1000);
+		$history->setMaxResults(50);
 			
 		// Request a list of places from Google Latitude History
 		echo " > Requesting places";
@@ -123,7 +123,7 @@ class user extends model{
 		// Create the Google Latitude History access object
 		$history = $latitude->history();
 		$history->setGranularity('best');
-		$history->setMaxResults(1000);
+		$history->setMaxResults(50);
 		
 		// Work out our starting timestamp
 		$time_ms_two_weeks_ago = strtotime("two weeks ago") * 1000;
@@ -156,7 +156,8 @@ class user extends model{
 			$oNewPoint->set_uid($this->get_uid());
 			$human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
 			
-			if($oNewPoint->save()){
+			if(!$oNewPoint->already_exists()){
+                $oNewPoint->save()
 				echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
 				echo "Saved as {$oNewPoint->get_pid()}\n";
 				$added++;
