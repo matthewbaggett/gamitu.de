@@ -29,6 +29,7 @@ class point extends model{
     		->search()
 			->where('hash', $this->get_hash())
 			->execOne();
+        echo "Hash: {$this->get_hash()}\n";
         if($existing_match){
             return FALSE;
         }

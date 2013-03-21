@@ -166,6 +166,7 @@ class user extends model{
 			
 		}
 		echo "Added {$added}, ignored {$ignored}\n\n";
+        exit;
 		return array($added, $ignored);
 	}
 	
