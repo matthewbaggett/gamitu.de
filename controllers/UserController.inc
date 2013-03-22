@@ -35,8 +35,10 @@ class UserController extends BaseController{
 			
 			$userinfo = eden('google')->userinfo($access['access_token']);
 			$profile = $userinfo->me();
+            
+            // TODO: Use refresh token to refresh the freaking token.
 			
-			//First try to log them in with these credentials:
+			// First try to log them in with these credentials:
 			$log_in_success = user::factory()->attempt_login_with_google($profile['id']);
 			if($log_in_success instanceof user){
 				$log_in_success->set_access_token($access['access_token'])->save();
