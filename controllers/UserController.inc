@@ -2,7 +2,7 @@
 
 class UserController extends BaseController{
 	
-	public function UpdateAccessKey(){
+	public function UpdateAccessKeyAction(){
 		$auth = eden('google')
 			->auth(
 				GOOGLE_CLIENT_ID,
