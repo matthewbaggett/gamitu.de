@@ -23,8 +23,14 @@ class scheduled_checkin_event extends model{
     protected $_day_sunday_type             = model::TYPE_ON_OFF;
     protected $probability;
     protected $_probability_type            = model::TYPE_INT;
-    protected $fudge_minuites;
-    protected $_fudge_minuites_type         = model::TYPE_INT;
+    protected $start_hour;
+    protected $_start_hour_type             = model::TYPE_INT;
+    protected $start_minute;
+    protected $_start_minute_type           = model::TYPE_INT;
+    protected $end_hour;
+    protected $_end_hour_type               = model::TYPE_INT;
+    protected $end_minute;
+    protected $_end_minute_type             = model::TYPE_INT;
     protected $foursquare_location_id;
     protected $_foursquare_location_id_type = model::TYPE_INT;
 	
