@@ -7,17 +7,17 @@ $random_salutations = array(
     'Tjike',
     'Saluton'
 );
-$random_salutation = $random_salutations[rand(0,count($random_salutations-1))];
+$random_salutation = $random_salutations[rand(0, count($random_salutations) - 1)];
 ?>
 
 <div class="hero-unit">
-    <?php if(user::is_loggedin()):?>
-	    <h1>Welcome to <?php echo $this->get_sitename();?></h1>
-	    <p><?php echo $this->get_description()?></p>
-	    <p><a href="/user/register-google" class="btn btn-primary btn-large">Login in with Google &raquo;</a></p>
+    <?php if(!user::is_loggedin()):?>
+	<h1>Welcome to <?php echo $this->get_sitename();?></h1>
+	<p><?php echo $this->get_description()?></p>
+        <p><a href="/user/register-google" class="btn btn-primary btn-large">Login in with Google &raquo;</a></p>
     <?php else: ?>
         <h1><?php echo $random_salutation?>, <?=user::get_current_user()->get_username()?>!</h1>
-        
+        <p>Dum de dum :T</p>
     <?php endif; ?>
 </div>
 

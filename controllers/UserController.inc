@@ -1,6 +1,17 @@
 <?php 
 
 class UserController extends BaseController{
+	
+	public function UpdateAccessKeyAction(){
+		$auth = eden('google')
+			->auth(
+				GOOGLE_CLIENT_ID,
+				GOOGLE_CLIENT_SECRET,
+				GOOGLE_LOGIN_REDIRECT,
+				GOOGLE_API_KEY);
+		var_dump($auth);
+		exit;
+	}
 	public function RegisterGoogleAction(){
 		$scopes = array(
 				'userinfo',
