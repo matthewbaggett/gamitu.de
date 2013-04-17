@@ -40,7 +40,7 @@ class AccountController extends BaseController {
   public function FoursquareShowPlacesAction(){
     $user = user::get_current_user();
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET, $user->get_foursquare_account()->get_token());
-    $venue_history = $fsq->post("v2/users/self/venuehistory");
+    $venue_history = $fsq->post("/users/self/venuehistory");
     var_dump($venue_history);exit;
   }
 
