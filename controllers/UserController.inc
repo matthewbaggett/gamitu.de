@@ -12,7 +12,7 @@ class UserController extends BaseController{
 		);
     $g_client = $this->get_google_client();
     $g_oauth2 = new Google_Oauth2Service($g_client);
-    $g_plus = new Google_PlusService($g_client);
+    //$g_plus = new Google_PlusService($g_client);
     $g_latitude = new Google_LatitudeService($g_client);
 		
 		//if no code and no session
@@ -31,8 +31,7 @@ class UserController extends BaseController{
       $user = $g_oauth2->userinfo->get();
 
       // Get access token
-      $access = json_decode($g_client->getAccessToken());
-      var_dump($access);exit;
+      $access = $g_client->getAccessToken();
 
       // These fields are currently filtered through the PHP sanitize filters.
       // See http://www.php.net/manual/en/filter.filters.sanitize.php
@@ -51,8 +50,7 @@ class UserController extends BaseController{
       }
 
       // Update the users records
-      $oUser->set_access_token($access['access_token']);
-      $oUser->set_access_token_expiry(time() + $access['expires_in']);
+      $oUser->update_access_token($access);
       $oUser->set_email($email);
       $oUser->set_firstname($user['given_name']);
       $oUser->set_surname($user['family_name']);
@@ -174,15 +172,17 @@ class UserController extends BaseController{
 		$users = user::get_all_users();
 		foreach($users as $user){
 			echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
-			
+
+      echo " > Refresh Token...";
+      $user->update_refresh_token($this->get_google_client($user->get_access_token()));
 			// Get their locations
-			try{
+			/*try{
 				$user->update_latitude_locations();
 				point::recalculate_point_order();
 			}catch(Exception $e){
 				$e->getmessage()."\n";
 			}
-			echo "\n\n";
+			echo "\n\n";*/
 		}
 		exit;
 	}

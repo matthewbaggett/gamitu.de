@@ -7,7 +7,8 @@ class user extends model{
 	protected $username;
 	protected $password;
 	protected $email;
-	protected $access_token;
+	protected $refresh_token;
+  protected $access_token;
 	protected $access_token_expiry;
 	protected $_access_token_expiry_type = self::TYPE_DATE;
 	protected $google_id;
@@ -189,4 +190,22 @@ class user extends model{
 							->execOne();
 		return $location;
 	}
+
+  public function update_refresh_token(Google_Client $g_client){
+    $g_client->refreshToken($this->get_refresh_token())
+    $this->update_access_token($g_client->getAccessToken());
+    return $this;
+  }
+
+  public function update_access_token($access_token){
+    if(!is_object($access_token)){
+      $access_token = json_decode($access_token);
+    }
+
+    $this->set_access_token($access_token->access_token);
+    $this->set_access_token_expiry(time() + $access_token->expires_in);
+    $this->set_refresh_token($access_token->refresh_token);
+    $this->save();
+    return $this;
+  }
 }
