@@ -152,4 +152,11 @@ class user extends model {
 
     return $this;
   }
+
+  /**
+   * @return foursquare_account
+   */
+  public function get_foursquare_account(){
+    return foursquare_account::search()->where('uid', $this->get_uid())->execOne();
+  }
 }
