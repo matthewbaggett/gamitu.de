@@ -10,8 +10,9 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active"><a href="/">Home</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<li><a href="/user/update_access_key">Update Google Access Key Manually</a></li>
+          <?php if(user::is_loggedin()):?>
+          <li><a href="/user/edit">My Dashboard</a></li>
+          <?php endif; ?>
 				</ul>
 				<ul class="nav pull-right">
 					<?php if(user::is_loggedin()):?>
