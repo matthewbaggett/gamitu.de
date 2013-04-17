@@ -42,8 +42,7 @@ class AccountController extends BaseController {
     $user = user::get_current_user();
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET, $user->get_foursquare_account()->get_token());
     $response = json_decode($fsq->get("/users/self/venuehistory")->responseText);
-    $venue_history = $response->response->venues;
-    var_dump($venue_history);exit;
+    $this->_view->venue_history = $response->response->venues->items;
   }
 
   public function DataAction(){}
