@@ -16,6 +16,7 @@
 				<ul class="nav pull-right">
 					<?php if(user::is_loggedin()):?>
 						<li><a href="/user/edit">Hello, <?=user::get_current_user()->get_username()?></a></li>
+            <li class="icon"><img src="<?=user::get_current_user()->get_face()?>"/></li>
 						<li><a href="/user/logout">Sign out</a></li>
 					<?php else:?>
 						<li><a href="/user/login">Sign in</a></li>

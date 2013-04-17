@@ -63,11 +63,13 @@ class point extends model{
 	
 	public function get_town(){
 		$geocode = $this->get_geolocation();
-		foreach($geocode['results'][0]['address_components'] as $address_component){
-			if($address_component['types'][0] == 'postal_town'){
-				return $address_component['long_name'];
-			}
-		}
+    if(isset($geocode['results'][0]['address_components'])){
+      foreach($geocode['results'][0]['address_components'] as $address_component){
+        if($address_component['types'][0] == 'postal_town'){
+          return $address_component['long_name'];
+        }
+      }
+    }
 		return "Unknown Town";
 	}
 	
