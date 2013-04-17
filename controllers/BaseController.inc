@@ -1,22 +1,23 @@
-<?php 
+<?php
 
-class BaseController{
-	protected $_view;
-	
-	public function __construct($view){
-		$this->_view = $view;
-		header('Content-Type: text/plain',true);
-		
-		if(method_exists($this,"AllActions")){
-			$this->AllActions();
-		}
-	}
+class BaseController {
+  protected $_view;
+
+  public function __construct($view) {
+    $this->_view = $view;
+    header('Content-Type: text/plain', true);
+
+    if (method_exists($this, "AllActions")) {
+      $this->AllActions();
+    }
+  }
 
   /**
    * Get a an instance of our Google Client
+   *
    * @return Google_Client
    */
-  public function get_google_client($access_token = null){
+  public function get_google_client($access_token = null) {
     $client = new Google_Client();
     $client->setApplicationName(APPLICATION_NAME);
     // Visit https://code.google.com/apis/console?api=plus to generate your
@@ -26,9 +27,10 @@ class BaseController{
     $client->setRedirectUri(GOOGLE_LOGIN_REDIRECT);
     $client->setDeveloperKey(GOOGLE_API_KEY);
     $client->setAccessType('offline');
-    if($access_token){
+    if ($access_token) {
       $client->setAccessToken($access_token);
     }
+
     return $client;
   }
 }

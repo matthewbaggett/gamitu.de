@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-class IndexController extends BaseController{
-	public function IndexAction(){
-		
-	}
+class IndexController extends BaseController {
+  public function IndexAction() {
+
+  }
 }
