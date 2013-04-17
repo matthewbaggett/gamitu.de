@@ -6,10 +6,21 @@
       <div class="row-fluid">
         <div class="span12">
           <h2><?=t("Foursquare Accounts")?></h2>
+          <?php if(!count($this->foursquare_accounts) > 0): ?>
           <p><?=l(t("Attach an account!"),"Account","Foursquare-Attach"); ?></p>
+          <?php endif; ?>
         </div><!--/span-->
       </div><!--/row-->
     </div><!--/span-->
+    <div class="span9">
+      <div class="row-fluid">
+        <?php foreach($this->foursquare_accounts as $foursquare_account): ?>
+          <div class="span6">
+            Token: <?=$foursquare_account->get_token(); ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
   </div><!--/row-->
 <hr>
 

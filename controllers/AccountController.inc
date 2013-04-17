@@ -10,7 +10,10 @@ class AccountController extends BaseController {
 
   public function TwitterAction(){}
 
-  public function FoursquareAction(){}
+  public function FoursquareAction(){
+    $user = user::get_current_user();
+    $this->_view->foursquare_accounts = foursquare_account::search()->where('uid', $user->get_uid())->exec();
+  }
 
   public function FoursquareAttachAction(){
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET);
