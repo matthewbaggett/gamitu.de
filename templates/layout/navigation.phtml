@@ -9,18 +9,18 @@
 			<a class="brand" href="/"><?php echo t($this->get_sitename()); ?></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/"><?=t("Home");?></a></li>
-          <?php if(user::is_loggedin()):?>
-          <li><a href="/account"><?=t("My Dashboard");?></a></li>
+          <li><?=l(t("Home"));?></li>
+					<?php if(user::is_loggedin()):?>
+          <li><?=l(t("My Dashboard"), "account");?></li>
           <?php endif; ?>
 				</ul>
 				<ul class="nav pull-right">
 					<?php if(user::is_loggedin()):?>
-						<li><a href="/account"><?=t("Hello");?>", <?=user::get_current_user()->get_username()?></a></li>
+            <li><?=l(t("Hello, @username",array('@username' => user::get_current_user()->get_username())),"account");?></li>
             <li class="icon"><img src="<?=user::get_current_user()->get_face()?>"/></li>
-						<li><a href="/user/logout"><?=t("Sign out");?></a></li>
+            <li><?=l(t("Sign out"), "user", "logout");?></li>
 					<?php else:?>
-						<li><a href="/user/login"><?=t("Sign in");?></a></li>
+						<li><?=l(t("Sign in"), "user", "login");?></li>
 					<?php endif; ?>
 				</ul>
 			</div><!--/.nav-collapse -->
