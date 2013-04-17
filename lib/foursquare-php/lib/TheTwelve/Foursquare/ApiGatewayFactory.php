@@ -58,7 +58,7 @@ class ApiGatewayFactory
      */
     public function setClientCredentials($id, $secret)
     {
-
+echo "Id: {$id}";
         $this->clientId = $id;
         $this->clientSecret = $secret;
         return $this;
