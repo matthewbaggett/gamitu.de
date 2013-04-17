@@ -45,12 +45,17 @@ class AccountController extends BaseController {
     $venue_history = $response->response->venues->items;
 
     foreach($venue_history as $venue){
+      $scheduled_events = scheduled_checkin_event::search()
+                                ->where('uid',$user->get_uid())
+                                ->where('foursquare_location_id', $venue->venue->id)
+                                ->exec();
       $sorted_venue_history[$venue->venue->name] = array(
         'ID' => $venue->venue->id,
         'Name' => $venue->venue->name,
         'City' => $venue->venue->location->city,
         'Country' => $venue->venue->location->country,
         'Visits' => $venue->beenHere,
+        'Scheduled' => count($scheduled_events) > 0 ? 'Yes':'No',
         '_Raw' => $venue,
       );
     }
