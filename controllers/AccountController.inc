@@ -10,10 +10,28 @@ class AccountController extends BaseController {
 
   public function TwitterAction(){}
 
+  public function _FoursquareInclude(){
+    // Good grief.
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/ApiGatewayFactory.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/AuthenticationGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/CheckinsGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/EndpointGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/ListsGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/PhotosGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/TipsGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/UsersGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/VenueGroupsGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/VenuesGateway.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/BuzzHttpClient.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/HttpClientAdaptor.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/SymfonyHttpClient.php");
+  }
   /**
    * @return \TheTwelve\Foursquare\ApiGatewayFactory
    */
   public function _FoursquareGetApiFactory(){
+    $this->_FoursquareInclude();
     $client = new \TheTwelve\Foursquare\HttpClient\SymfonyHttpClient();
     $factory = new \TheTwelve\Foursquare\ApiGatewayFactory($client);
 
