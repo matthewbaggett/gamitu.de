@@ -25,6 +25,7 @@ class BaseController{
     $client->setClientSecret(GOOGLE_CLIENT_SECRET);
     $client->setRedirectUri(GOOGLE_LOGIN_REDIRECT);
     $client->setDeveloperKey(GOOGLE_API_KEY);
+    $client->setAccessType('offline');
     return $client;
 
   }

@@ -34,11 +34,9 @@ class UserController extends BaseController{
       // See http://www.php.net/manual/en/filter.filters.sanitize.php
       $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
       $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
-			var_dump($user);exit;
-            
 
 			// First try to log them in with these credentials:
-			$log_in_success = user::factory()->attempt_login_with_google($profile['id']);
+			$log_in_success = user::factory()->attempt_login_with_google($user['id']);
 			if($log_in_success instanceof user){
 				$log_in_success->set_access_token($access['access_token'])->save();
 				header("Location: /user/edit");
@@ -47,14 +45,15 @@ class UserController extends BaseController{
 				$oUser = user::factory()
 					->set_access_token($access['access_token'])
 					->set_access_token_expiry($token_expire)
-					->set_firstname($profile['given_name'])
-					->set_surname($profile['family_name'])
-					->set_link($profile['link'])
-					->set_face($profile['picture'])
-					->set_gender($profile['male'])
-					->set_birthday($profile['birthday'])
-					->set_locale($profile['locale'])
-					->set_google_id($profile['id'])
+          ->set_email($email)
+					->set_firstname($user['given_name'])
+					->set_surname($user['family_name'])
+					->set_link($user['link'])
+					->set_face($img)
+					->set_gender($user['male'])
+					->set_birthday($user['birthday'])
+					->set_locale($user['locale'])
+					->set_google_id($user['id'])
 					->save()->reload();
 				$_SESSION['registration_id'] = $oUser->get_id();
 				header("Location: /user/register");
