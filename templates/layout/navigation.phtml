@@ -11,12 +11,12 @@
 				<ul class="nav">
 					<li class="active"><a href="/">Home</a></li>
           <?php if(user::is_loggedin()):?>
-          <li><a href="/user/edit">My Dashboard</a></li>
+          <li><a href="/account">My Dashboard</a></li>
           <?php endif; ?>
 				</ul>
 				<ul class="nav pull-right">
 					<?php if(user::is_loggedin()):?>
-						<li><a href="/user/edit">Hello, <?=user::get_current_user()->get_username()?></a></li>
+						<li><a href="/account">Hello, <?=user::get_current_user()->get_username()?></a></li>
             <li class="icon"><img src="<?=user::get_current_user()->get_face()?>"/></li>
 						<li><a href="/user/logout">Sign out</a></li>
 					<?php else:?>
