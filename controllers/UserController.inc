@@ -59,6 +59,8 @@ class UserController extends BaseController{
       $oUser->set_locale($user['locale']);
       $oUser->set_google_id($user['id']);
       $oUser->save()->reload();
+      fb::log($user);
+      fb::log($oUser);
 
       // Send onwards based on creation state.
       if($login_or_create == "login"){
