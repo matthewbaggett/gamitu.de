@@ -2,3 +2,14 @@
 	width: 100%;
 	height: 400px;
 }
+
+.navbar .nav > li.icon{
+    width: 32px;
+    height: 32px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+.navbar .nav > li.icon img{
+    width: 32px;
+    height: 32px;
+}
