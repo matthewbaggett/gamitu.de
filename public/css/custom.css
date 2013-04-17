@@ -8,8 +8,10 @@
     height: 32px;
     border: 1px solid white;
     border-radius: 3px;
+    margin-top: 3px;
 }
 .navbar .nav > li.icon img{
     width: 32px;
     height: 32px;
+    border-radius: 3px;
 }
