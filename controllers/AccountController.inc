@@ -19,7 +19,7 @@ class AccountController extends BaseController {
   }
 
   public function FoursquareAttachCompleteAction(){
-    $code = $_POST['code'];
+    $code = $_REQUEST['code'];
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET);
     $token = $fsq->getAccessToken($code, FOURSQUARE_REDIRECT_URL);
     var_dump($token);
