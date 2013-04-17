@@ -3,15 +3,15 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">My Gamitu.de</li>
-      <li><a href="/account">Home</a></li>
-      <li class="active"><a href="/account/edit">My Account</a></li>
-      <li><a href="/account/google">Google</a></li>
-      <li><a href="/account/twitter">Twitter</a></li>
-      <li><a href="/account/foursquare">Foursquare</a></li>
+      <li><?=$this->_view->l("Home", "account"); ?></li>
+      <li><?=$this->_view->l("My Account", "account", "edit"); ?></li>
+      <li><?=$this->_view->l("Google", "account", "google"); ?></li>
+      <li><?=$this->_view->l("Twitter", "account", "twitter"); ?></li>
+      <li><?=$this->_view->l("Foursquare", "account", "foursquare"); ?></li>
       <li class="nav-header">Location</li>
-      <li><a href="/account/data">Location Data</a></li>
-      <li><a href="/account/badges">Badges</a></li>
-      <li><a href="/account/stats">Statistics</a></li>
+      <li><?=$this->_view->l("Data", "account", "data"); ?></li>
+      <li><?=$this->_view->l("Badges", "account", "badges"); ?></li>
+      <li><?=$this->_view->l("Statistics", "account", "stats"); ?></li>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->
