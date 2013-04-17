@@ -114,7 +114,7 @@ class UserController extends BaseController {
 
     $g_client   = $this->get_google_client($user->get_access_token());
     $g_latitude = new Google_LatitudeService($g_client);
-    $locations  = $g_latitude->listLocation(array('max-results' => 1000));
+    $locations  = $g_latitude->location->listLocation(array('max-results' => 1000));
     var_dump($locations);
     exit;
 
