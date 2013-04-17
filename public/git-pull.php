@@ -1,40 +1,40 @@
 <?php
-if((!isset($_REQUEST['password']) || $_REQUEST['password'] !== 'kU4EdRaw') && PHP_SAPI !== 'cli'){
-    die("Wrong password");
+if ((!isset($_REQUEST['password']) || $_REQUEST['password'] !== 'kU4EdRaw') && PHP_SAPI !== 'cli') {
+  die("Wrong password");
 }
 chdir("../");
 ob_start();
 
 // The commands
 $commands = array(
-	'echo $PWD',
-	'whoami',
-	'hostname',
-    'git status',
-    'git pull',
-	'git status',
-	
-	'rm lib/tcore -Rf',
-	'mkdir lib/tcore -p',
-    'cd lib/tcore; pwd; git clone git@github.com:matthewbaggett/tcore.git . --verbose',
-	
-    'rm lib/eden -Rf',
-	'mkdir lib/eden -p',
-    'cd lib/eden; pwd; git clone git@github.com:matthewbaggett/eden.git . --verbose',
-	
-    'rm lib/firephp -Rf',
-	'mkdir lib/firephp -p',
-    'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git . --verbose',
+  'echo $PWD',
+  'whoami',
+  'hostname',
+  'git status',
+  'git pull',
+  'git status',
+
+  'rm lib/tcore -Rf',
+  'mkdir lib/tcore -p',
+  'cd lib/tcore; pwd; git clone git@github.com:matthewbaggett/tcore.git . --verbose',
+
+  'rm lib/eden -Rf',
+  'mkdir lib/eden -p',
+  'cd lib/eden; pwd; git clone git@github.com:matthewbaggett/eden.git . --verbose',
+
+  'rm lib/firephp -Rf',
+  'mkdir lib/firephp -p',
+  'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git . --verbose',
 );
 
 // Run the commands for output
 $output = '';
-foreach($commands AS $command){
-	// Run it
-	$tmp = shell_exec($command);
-	// Output
-	$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
-	$output .= htmlentities(trim($tmp)) . "\n";
+foreach ($commands AS $command) {
+  // Run it
+  $tmp = shell_exec($command);
+  // Output
+  $output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
+  $output .= htmlentities(trim($tmp)) . "\n";
 }
 
 if(PHP_SAPI !== 'cli'){
