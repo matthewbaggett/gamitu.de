@@ -212,7 +212,9 @@ class user extends model {
       $access_token = json_decode($access_token);
     }
 
-    $this->set_access_token($access_token->access_token);
+    $encoded_token = json_encode($access_token);
+
+    $this->set_access_token($encoded_token);
     $this->set_access_token_expiry(time() + $access_token->expires_in);
     $this->set_refresh_token($access_token->refresh_token);
     $this->save();
