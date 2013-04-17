@@ -10,6 +10,10 @@ attempt_define("GOOGLE_CLIENT_SECRET",'MuzN_JnyjmaVZuL5zEfhhcQ1');
 attempt_define("GOOGLE_API_KEY","AIzaSyAOp7CgK7IF_w97D_BIcU7iSb_544FOZro");
 attempt_define("GOOGLE_LOGIN_REDIRECT",'http://gamitu.de/user/register-google');
 
+// Define 4SQ api things
+attempt_define("FOURSQUARE_ID", "A0E0UFLSVUV45SMMCD0O0J4OIO0I3OFJJB5U3SZ0IFSVNYJC");
+attempt_define("FOURSQUARE_SECRET", "2UZWRFA2WL2UK4N1LCF3SBLPLNF0IBMI4BGD04S1QWC0VNTA");
+
 // Default configuration options
 \fb::setEnabled(FALSE);
 \fb::setEnabled(TRUE);
@@ -20,3 +24,4 @@ attempt_define("GOOGLE_LOGIN_REDIRECT",'http://gamitu.de/user/register-google');
 	->set_title("Gamitu.de")
 	->set_sitename("Gamitude");
 	
+attempt_define("SCHEDULE_FUDGE",FALSE);

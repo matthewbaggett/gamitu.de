@@ -32,6 +32,6 @@ class scheduled_checkin_event extends model{
     protected $end_minute;
     protected $_end_minute_type             = model::TYPE_INT;
     protected $foursquare_location_id;
-    protected $_foursquare_location_id_type = model::TYPE_INT;
+    protected $_foursquare_location_id_type = model::TYPE_STR;
 	
 }

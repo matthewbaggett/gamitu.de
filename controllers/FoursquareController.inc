@@ -1,6 +1,6 @@
 <?php 
 
-class ScheduleController extends BaseController{
+class MapController extends BaseController{
 	public function ViewAction(){
         $user = user::get_current_user();
         $this->_view->events = scheduled_checkin_event::search()->where('uid', $user->uid)->exec();
@@ -19,5 +19,7 @@ class ScheduleController extends BaseController{
         }
     }
     
-  
+    public function AttachAction(){
+        $auth = eden('foursquare')->auth(FOURSQUARE_ID, FOURSQUARE_SECRET, 'http://yourwebsite.com/auth');
+    }
 }

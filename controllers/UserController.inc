@@ -9,6 +9,7 @@ class UserController extends BaseController{
 				GOOGLE_CLIENT_SECRET,
 				GOOGLE_LOGIN_REDIRECT,
 				GOOGLE_API_KEY);
+        $auth->forOffline();
 		var_dump($auth);
 		exit;
 	}
@@ -28,7 +29,6 @@ class UserController extends BaseController{
 				GOOGLE_API_KEY);
                 
         $auth->forOffline();
-		
 		
 		//if no code and no session
 		if(!isset($_GET['code']) && !isset($_SESSION['token'])) {
