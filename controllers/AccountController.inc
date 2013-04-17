@@ -13,9 +13,9 @@ class AccountController extends BaseController {
   public function _FoursquareInclude(){
     // Good grief.
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/ApiGatewayFactory.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/EndpointGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/AuthenticationGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/CheckinsGateway.php");
-    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/EndpointGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/ListsGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/PhotosGateway.php");
