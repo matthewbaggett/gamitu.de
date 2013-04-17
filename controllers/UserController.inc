@@ -3,16 +3,8 @@
 class UserController extends BaseController {
 
   public function RegisterGoogleAction() {
-    $scopes   = array(
-      'userinfo',
-      'latitude_all_best',
-      'latitude_all_city',
-      'latitude_current_best',
-      'latitude_current_city'
-    );
     $g_client = $this->get_google_client();
     $g_oauth2 = new Google_Oauth2Service($g_client);
-    //$g_plus = new Google_PlusService($g_client);
     $g_latitude = new Google_LatitudeService($g_client);
 
     //if no code and no session
@@ -81,7 +73,7 @@ class UserController extends BaseController {
       if ($log_in_success) {
         header("Location: /user/edit");
       } else {
-        $this->_view->message    = "Sorry, incorrect username or password";
+        $this->_view->message    = t("Sorry, incorrect username or password");
         $this->_view->form_error = true;
       }
 
@@ -127,14 +119,19 @@ class UserController extends BaseController {
 
       if (!$oNewPoint->already_exists()) {
         $oNewPoint->save();
-        echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
-        echo "Saved as {$oNewPoint->get_pid()}\n";
+        echo t("Adding point @uid : @lat/@long @@time", array(
+          '@uid' => $oNewPoint->get_uid(),
+          '@lat' => $oNewPoint->get_latitude(),
+          '@long' => $oNewPoint->get_longitude(),
+          '@time' => $human_time
+        ));
+        echo t("Saved as @pid", array('@pid' => $oNewPoint->get_pid())) . "\n";
         $added++;
       } else {
         $ignored++;
       }
     }
-    echo "Added {$added}, ignored {$ignored}\n\n";
+    echo t("Added @added, ignored @ignored", array('@added' => $added, '@ignored' => $ignored)) . "\n\n";
     return array($added, $ignored);
   }
 
