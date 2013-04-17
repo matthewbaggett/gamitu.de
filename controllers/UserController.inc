@@ -206,7 +206,7 @@ class UserController extends BaseController {
         echo "OKAY\n";
 
         // Get their locations
-        echo " > Update Locations... "
+        echo " > Update Locations... ";
         try{
           $this->UpdateLatitudeFeed($user);
           point::recalculate_point_order();
