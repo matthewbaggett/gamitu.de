@@ -115,9 +115,27 @@ class UserController extends BaseController {
     $g_client   = $this->get_google_client($user->get_access_token());
     $g_latitude = new Google_LatitudeService($g_client);
     $locations  = $g_latitude->location->listLocation(array('max-results' => 1000));
-    var_dump($locations);
-    exit;
+    $added      = 0;
+    $ignored    = 0;
+    foreach ($locations['items'] as $location) {
+      $oNewPoint = new point();
+      $oNewPoint->set_timestamp_ms($location['timestampMs']);
+      $oNewPoint->set_latitude($location['latitude']);
+      $oNewPoint->set_longitude($location['longitude']);
+      $oNewPoint->set_uid($user->get_uid());
+      $human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
 
+      if (!$oNewPoint->already_exists()) {
+        $oNewPoint->save();
+        echo "Adding point {$oNewPoint->get_uid()}:{$oNewPoint->get_latitude()}/{$oNewPoint->get_longitude()}@{$human_time} ";
+        echo "Saved as {$oNewPoint->get_pid()}\n";
+        $added++;
+      } else {
+        $ignored++;
+      }
+    }
+    echo "Added {$added}, ignored {$ignored}\n\n";
+    return array($added, $ignored);
   }
 
   public function UpdateLatitudeFeedAction() {

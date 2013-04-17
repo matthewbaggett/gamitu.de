@@ -96,6 +96,7 @@ class user extends model {
     return false;
   }
 
+  /*
   public function update_latitude_locations() {
     $newest_point_on_record = point::factory()
       ->search()
@@ -125,7 +126,7 @@ class user extends model {
 
     // Process the places
     return $this->_process_places($places);
-  }
+  }*/
 
   static public function get_all_users() {
     $users = user::factory()
@@ -137,7 +138,7 @@ class user extends model {
     return $users;
 
   }
-
+/*
   public function get_last_two_weeks_of_latitude_locations() {
 
     // Create the Google Latitude access object
@@ -166,8 +167,9 @@ class user extends model {
     }
     // Process the places
     $this->_process_places($places_pool);
-  }
+  }*/
 
+  /*
   protected function _process_places($places) {
     $added   = 0;
     $ignored = 0;
@@ -191,7 +193,7 @@ class user extends model {
     echo "Added {$added}, ignored {$ignored}\n\n";
 
     return array($added, $ignored);
-  }
+  }*/
 
   public function get_last_location() {
     $location = point::factory()
