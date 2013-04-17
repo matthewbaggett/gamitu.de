@@ -15,6 +15,7 @@ attempt_define("GOOGLE_LOGIN_REDIRECT",'http://gamitu.de/user/register-google');
 // Define 4SQ api things
 define("FOURSQUARE_ID", "A0E0UFLSVUV45SMMCD0O0J4OIO0I3OFJJB5U3SZ0IFSVNYJC");
 define("FOURSQUARE_SECRET", "2UZWRFA2WL2UK4N1LCF3SBLPLNF0IBMI4BGD04S1QWC0VNTA");
+define("FOURSQUARE_REDIRECT_URL", "https://gamitu.de/Account/Foursquare-Attach-Complete");
 
 // Default configuration options
 \fb::setEnabled(FALSE);
