@@ -11,26 +11,12 @@
     </div><!--/span-->
     <div class="span9">
       <div class="row-fluid">
-        <?php foreach($this->venue_history as $venue): ?>
-          <!--
-          <?php var_dump($venue); ?>
-          -->
-          <div class="span3">
-            <dl>
-              <dt><?=t("Name")?></dt>
-              <dd><?=$venue->venue->name?></dd>
-              <dt><?=t("ID")?></dt>
-              <dd><?=$venue->venue->id?></dd>
-              <dt><?=t("City")?></dt>
-              <dd><?=$venue->venue->location->city?></dd>
-              <dt><?=t("Country")?></dt>
-              <dd><?=$venue->venue->location->country?></dd>
-            </dl>
-          </div><!--/span-->
-        <?php endforeach; ?>
+        <div class="span12">
+          <?=$this->table($this->venue_history); ?>
+        </div><!--/span-->
       </div><!--/row-->
     </div><!--/span-->
-  </div><!--/row-->
+  </div>
 <hr>
 
 <footer>

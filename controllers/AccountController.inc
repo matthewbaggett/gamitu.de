@@ -42,7 +42,19 @@ class AccountController extends BaseController {
     $user = user::get_current_user();
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET, $user->get_foursquare_account()->get_token());
     $response = json_decode($fsq->get("/users/self/venuehistory")->responseText);
-    $this->_view->venue_history = $response->response->venues->items;
+    $venue_history = $response->response->venues->items;
+
+    foreach($venue_history as $venue){
+      $sorted_venue_history[$venue->venue->name] = array(
+        'ID' => $venue->venue->id,
+        'Name' => $venue->venue->name,
+        'City' => $venue->venue->location->city,
+        'Country' => $venue->venue->location->country,
+        '_Raw' => $venue
+      );
+    }
+    ksort($sorted_venue_history);
+    $this->_view->venue_history = array_values($sorted_venue_history);
   }
 
   public function DataAction(){}
