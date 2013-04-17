@@ -1,18 +1,7 @@
 <?php 
 
 class UserController extends BaseController{
-	
-	public function UpdateAccessKeyAction(){
-		$auth = eden('google')
-			->auth(
-				GOOGLE_CLIENT_ID,
-				GOOGLE_CLIENT_SECRET,
-				GOOGLE_LOGIN_REDIRECT,
-				GOOGLE_API_KEY);
-        $auth->forOffline();
-		var_dump($auth);
-		exit;
-	}
+
 	public function RegisterGoogleAction(){
 		$scopes = array(
 				'userinfo',
@@ -21,20 +10,16 @@ class UserController extends BaseController{
 				'latitude_current_best', 
 				'latitude_current_city'
 		);
-		$auth = eden('google')
-			->auth(
-				GOOGLE_CLIENT_ID, 
-				GOOGLE_CLIENT_SECRET, 
-				GOOGLE_LOGIN_REDIRECT, 
-				GOOGLE_API_KEY);
-                
-        $auth->forOffline();
+    $g_client = $this->get_google_client();
+    $g_oauth2 = new Google_Oauth2Service($g_client);
+    $g_plus = new Google_PlusService($g_client);
+    $g_latitude = new Google_LatitudeService($g_client);
 		
 		//if no code and no session
 		if(!isset($_GET['code']) && !isset($_SESSION['token'])) {
 			//redirect to login
-			$login = $auth->getLoginUrl($scopes);
-			header('Location: '.$login);
+			$authUrl = $g_client->createAuthUrl();
+			header('Location: '.$authUrl);
 			exit;
 		}
 		
@@ -42,13 +27,16 @@ class UserController extends BaseController{
 		
 		if(isset($_GET['code'])) {
 			//save it to session
-			$access = $auth->getAccess($_GET['code']);
-			
-			$userinfo = eden('google')->userinfo($access['access_token']);
-			$profile = $userinfo->me();
+      $g_client->authenticate($_GET['code']);
+      $user = $g_oauth2->userinfo->get();
+
+      // These fields are currently filtered through the PHP sanitize filters.
+      // See http://www.php.net/manual/en/filter.filters.sanitize.php
+      $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+      $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
+			var_dump($user);exit;
             
-            // TODO: Use refresh token to refresh the freaking token.
-			
+
 			// First try to log them in with these credentials:
 			$log_in_success = user::factory()->attempt_login_with_google($profile['id']);
 			if($log_in_success instanceof user){

@@ -4,6 +4,8 @@ ini_set('display_startup_errors', TRUE);
 ini_set('memory_limit', '2G');
 date_default_timezone_set("Europe/London");
 
+attempt_define("APPLICATION_NAME","Gamitude");
+
 // Define google api things
 attempt_define("GOOGLE_CLIENT_ID",'692588353126.apps.googleusercontent.com');
 attempt_define("GOOGLE_CLIENT_SECRET",'MuzN_JnyjmaVZuL5zEfhhcQ1');
