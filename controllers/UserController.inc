@@ -36,30 +36,38 @@ class UserController extends BaseController{
       $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
 
 			// First try to log them in with these credentials:
-			$log_in_success = user::factory()->attempt_login_with_google($user['id']);
-			if($log_in_success instanceof user){
-				$log_in_success->set_access_token($access['access_token'])->save();
-				header("Location: /user/edit");
-			}else{
-				$token_expire = time() + $access['expires_in'];
-				$oUser = user::factory()
-					->set_access_token($access['access_token'])
-					->set_access_token_expiry($token_expire)
-          ->set_email($email)
-					->set_firstname($user['given_name'])
-					->set_surname($user['family_name'])
-					->set_link($user['link'])
-					->set_face($img)
-					->set_gender($user['male'])
-					->set_birthday($user['birthday'])
-					->set_locale($user['locale'])
-					->set_google_id($user['id'])
-					->save()->reload();
-				$_SESSION['registration_id'] = $oUser->get_id();
+			$oUser = user::factory()->attempt_login_with_google($user['id']);
+
+      // Decide if login or create user
+			$login_or_create = ($oUser instanceof user) ? 'login' : 'create';
+
+      // If create, create a new oUser
+      if($login_or_create == 'create'){
+        $oUser = user::factory();
+      }
+
+      // Update the users records
+      $oUser->set_access_token($access['access_token']);
+      $oUser->set_access_token_expiry(time() + $access['expires_in']);
+      $oUser->set_email($email);
+      $oUser->set_firstname($user['given_name']);
+      $oUser->set_surname($user['family_name']);
+      $oUser->set_link($user['link']);
+      $oUser->set_face($img);
+      $oUser->set_gender($user['male']);
+      $oUser->set_birthday($user['birthday']);
+      $oUser->set_locale($user['locale']);
+      $oUser->set_google_id($user['id']);
+      $oUser->save()->reload();
+
+      // Send onwards based on creation state.
+      if($login_or_create == "login"){
+        header("Location: /user/edit");
+      }else{
+        $_SESSION['registration_id'] = $oUser->get_id();
 				header("Location: /user/register");
 			}
-			
-			exit;
+		  exit;
 		}
 	}
 	
