@@ -6,21 +6,21 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="/"><?php echo $this->get_sitename(); ?></a>
+			<a class="brand" href="/"><?php echo t($this->get_sitename()); ?></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active"><a href="/">Home</a></li>
+					<li class="active"><a href="/"><?=t("Home");?></a></li>
           <?php if(user::is_loggedin()):?>
-          <li><a href="/account">My Dashboard</a></li>
+          <li><a href="/account"><?=t("My Dashboard");?></a></li>
           <?php endif; ?>
 				</ul>
 				<ul class="nav pull-right">
 					<?php if(user::is_loggedin()):?>
-						<li><a href="/account">Hello, <?=user::get_current_user()->get_username()?></a></li>
+						<li><a href="/account"><?=t("Hello");?>", <?=user::get_current_user()->get_username()?></a></li>
             <li class="icon"><img src="<?=user::get_current_user()->get_face()?>"/></li>
-						<li><a href="/user/logout">Sign out</a></li>
+						<li><a href="/user/logout"><?=t("Sign out");?></a></li>
 					<?php else:?>
-						<li><a href="/user/login">Sign in</a></li>
+						<li><a href="/user/login"><?=t("Sign in");?></a></li>
 					<?php endif; ?>
 				</ul>
 			</div><!--/.nav-collapse -->
