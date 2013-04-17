@@ -127,9 +127,6 @@ class AuthenticationGateway extends EndpointGateway
      */
     protected function canInitiateLogin()
     {
-        var_dump($this->id);
-        var_dump($this->redirectUri);
-        var_dump($this->authorizeUri);
         return $this->id && $this->redirectUri && $this->authorizeUri;
     }
 
