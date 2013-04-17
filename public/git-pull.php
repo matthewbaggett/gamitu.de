@@ -25,6 +25,10 @@ $commands = array(
   'rm lib/firephp -Rf',
   'mkdir lib/firephp -p',
   'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git . --verbose',
+
+  'rm lib/foursquare-async -Rf',
+  'mkdir lib/foursquare-async -p',
+  'cd lib/foursquare-async; pwd; git clone git://github.com/jmathai/foursquare-async.git . --verbose'
 );
 
 // Run the commands for output
