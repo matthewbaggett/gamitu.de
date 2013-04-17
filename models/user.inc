@@ -192,7 +192,7 @@ class user extends model{
 	}
 
   public function update_refresh_token(Google_Client $g_client){
-    $g_client->refreshToken($this->get_refresh_token())
+    $g_client->refreshToken($this->get_refresh_token());
     $this->update_access_token($g_client->getAccessToken());
     return $this;
   }

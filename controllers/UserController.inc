@@ -173,8 +173,10 @@ class UserController extends BaseController{
 		foreach($users as $user){
 			echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
 
-      echo " > Refresh Token...";
+      echo " > Refresh Token... ";
       $user->update_refresh_token($this->get_google_client($user->get_access_token()));
+      echo "OKAY\n";
+
 			// Get their locations
 			/*try{
 				$user->update_latitude_locations();
