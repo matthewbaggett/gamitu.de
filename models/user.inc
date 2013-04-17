@@ -28,6 +28,16 @@ class user extends model {
 
   const MAX_LATITUDE_LOCATIONS_PER_REQUEST = 1000;
 
+  /**
+   * recast a user object so stupid IDEs don't have a waa waa
+   *
+   * @param user $user
+   * @return user
+   */
+  static public function cast(user $user){
+    return $user;
+  }
+
   public function login() {
     $_SESSION['user'] = serialize($this);
   }
@@ -195,6 +205,10 @@ class user extends model {
     return array($added, $ignored);
   }*/
 
+  /**
+   * Get the last point the user was seen at
+   * @return point
+   */
   public function get_last_location() {
     $location = point::factory()
       ->search()

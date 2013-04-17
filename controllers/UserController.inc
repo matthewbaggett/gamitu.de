@@ -190,20 +190,34 @@ class UserController extends BaseController {
   public function CronAction() {
     $users = user::get_all_users();
     foreach ($users as $user) {
+      $user = user::cast($user);
+
       echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
 
       echo " > Refresh Token... ";
-      $user->update_refresh_token($this->get_google_client($user->get_access_token()));
-      echo "OKAY\n";
-
-      // Get their locations
       try{
-        $this->UpdateLatitudeFeed($user);
-        point::recalculate_point_order();
-      }catch(Exception $e){
-        $e->getmessage()."\n";
+        $g_client = $this->get_google_client($user->get_access_token());
+      }catch(Google_AuthException $e){
+        echo "FAIL: Auth token invalid\n";
+        $g_client = false;
+      }
+      if($g_client){
+        $user->update_refresh_token($g_client);
+        echo "OKAY\n";
+
+        // Get their locations
+        echo " > Update Locations... "
+        try{
+          $this->UpdateLatitudeFeed($user);
+          point::recalculate_point_order();
+          $latest_point = $user->get_last_location();
+          echo "Last seen at {$latest_point->get_town()}\n";
+        }catch(Exception $e){
+          $e->getmessage()."\n";
+        }
       }
       echo "\n\n";
+
     }
     exit;
   }
