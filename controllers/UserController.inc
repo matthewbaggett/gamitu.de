@@ -143,7 +143,7 @@ class UserController extends BaseController {
     //list($added, $ignored) = $oUser->update_latitude_locations();
     list($added, $ignored) = $this->UpdateLatitudeFeed($oUser);
     $this->_view->user = $oUser;
-    \tcore\tcore::set_message("Added {$added} locations, ignored {$ignored} locations as duplicates.");
+    \tcore\tcore::set_message(t("Added @added locations, ignored @ignored locations as duplicates.", array('@added' => $added, '@ignored' => $ignored)));
     header("Location: {$_SERVER['HTTP_REFERER']}");
     exit;
   }
@@ -192,26 +192,26 @@ class UserController extends BaseController {
     foreach ($users as $user) {
       $user = user::cast($user);
 
-      echo "Processing {$user->get_firstname()} {$user->get_surname()}\n";
+      echo t("Processing @firstname @surname", array('@firstname' => $user->get_firstname(), '@surname' => $user->get_surname()))."\n";
 
-      echo " > Refresh Token... ";
+      echo " > " . t("Refresh Token") . "... ";
       try{
         $g_client = $this->get_google_client($user->get_access_token());
       }catch(Google_AuthException $e){
-        echo "FAIL: Auth token invalid\n";
+        echo t("FAIL: Auth token invalid") . "\n";
         $g_client = false;
       }
       if($g_client){
         $user->update_refresh_token($g_client);
-        echo "OKAY\n";
+        echo t("OKAY") . "\n";
 
         // Get their locations
-        echo " > Update Locations... ";
+        echo " > " . t("Update Locations") . "... ";
         try{
           $this->UpdateLatitudeFeed($user);
           point::recalculate_point_order();
           $latest_point = $user->get_last_location();
-          echo "Last seen at {$latest_point->get_town()}\n";
+          echo t("Last seen at @town", array('@town' => $latest_point->get_town() )) . "\n";
         }catch(Exception $e){
           $e->getmessage()."\n";
         }
