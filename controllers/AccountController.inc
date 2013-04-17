@@ -27,6 +27,7 @@ class AccountController extends BaseController {
     if(!$foursquare_account){
       $foursquare_account = new foursquare_account();
     }
+    $foursquare_account->set_uid($user->get_uid());
     $foursquare_account->set_token($token_response->responseText);
     $foursquare_account->save();
     header("Location: " . u("Account","Foursquare"));
