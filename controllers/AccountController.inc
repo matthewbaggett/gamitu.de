@@ -23,7 +23,7 @@ class AccountController extends BaseController {
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/UsersGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/VenueGroupsGateway.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/VenuesGateway.php");
-    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/HttpClientAdaptor.php");
+    require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/HttpClientAdapter.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/BuzzHttpClient.php");
     require_once("../lib/foursquare-php/lib/TheTwelve/Foursquare/HttpClient/SymfonyHttpClient.php");
   }
