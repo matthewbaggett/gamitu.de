@@ -221,4 +221,8 @@ class UserController extends BaseController {
     }
     exit;
   }
+
+  public function IndexAction(){
+    
+  }
 }
