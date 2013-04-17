@@ -31,22 +31,30 @@ class user extends model{
 	public function logout(){
 		unset($_SESSION['user']);
 	}
-	
-	static public function get_current_user(){
+
+  /**
+   * Get the current user.
+   * @return user
+   */
+  static public function get_current_user(){
 		if(self::is_loggedin()){
 			return unserialize($_SESSION['user']);
 		}else{
-			return FALSE;
+			return false;
 		}
 	}
-	
-	static public function is_loggedin(){
+
+  /**
+   * Are we logged in?
+   * @return bool
+   */
+  static public function is_loggedin(){
 		if(isset($_SESSION['user'])){
 			if(unserialize($_SESSION['user']) instanceof user){
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 	
 	static public function attempt_login($user, $password){
@@ -57,12 +65,12 @@ class user extends model{
 		if($oUser){
 			if(crypt($password, $oUser->get_password()) == $oUser->get_password()){
 				$oUser->login();
-				return TRUE;
+				return true;
 			}else{
-				return FALSE;
+				return false;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 	
 	static public function attempt_login_with_google($google_id){
@@ -74,7 +82,7 @@ class user extends model{
 			$oUser->login();
 			return $oUser;
 		}
-		return FALSE;
+		return false;
 	}
 	
 	public function update_latitude_locations(){
@@ -91,6 +99,7 @@ class user extends model{
 		// Create the Google Latitude access object
 		echo " > Get Google Latitude object\n";
 		$latitude = eden('google')->latitude(GOOGLE_API_KEY, $this->get_access_token());
+
 			
 		// Create the Google Latitude History access object
 		echo " > Get Google Latitude History object\n";

@@ -26,9 +26,13 @@ class UserController extends BaseController{
 		//Code is returned back from google
 		
 		if(isset($_GET['code'])) {
-			//save it to session
+			// save it to session
       $g_client->authenticate($_GET['code']);
       $user = $g_oauth2->userinfo->get();
+
+      // Get access token
+      $access = $g_client->getAccessToken();
+      var_dump($access);exit;
 
       // These fields are currently filtered through the PHP sanitize filters.
       // See http://www.php.net/manual/en/filter.filters.sanitize.php
@@ -107,10 +111,21 @@ class UserController extends BaseController{
 		header("Location: /");
 		exit;
 	}
-	
+
+  public function UpdateLatitudeFeed(user $user){
+
+    $g_client = $this->get_google_client($user->get_access_token());
+    $g_latitude = new Google_LatitudeService($g_client);
+    $locations = $g_latitude->listLocation(array('max-results' => 1000));
+    var_dump($locations);exit;
+
+  }
+
 	public function UpdateLatitudeFeedAction(){
-		$this->_view->user = user::get_current_user();
-		list($added, $ignored) = $this->_view->user->update_latitude_locations();
+		$oUser = user::get_current_user();
+		//list($added, $ignored) = $oUser->update_latitude_locations();
+    list($added, $ignored) = $this->UpdateLatitudeFeed($oUser);
+    $this->_view->user = $oUser;
 		\tcore\tcore::set_message("Added {$added} locations, ignored {$ignored} locations as duplicates.");
 		header("Location: {$_SERVER['HTTP_REFERER']}");
 		exit;

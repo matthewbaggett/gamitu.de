@@ -16,7 +16,7 @@ class BaseController{
    * Get a an instance of our Google Client
    * @return Google_Client
    */
-  public function get_google_client(){
+  public function get_google_client($access_token){
     $client = new Google_Client();
     $client->setApplicationName(APPLICATION_NAME);
     // Visit https://code.google.com/apis/console?api=plus to generate your
@@ -26,7 +26,9 @@ class BaseController{
     $client->setRedirectUri(GOOGLE_LOGIN_REDIRECT);
     $client->setDeveloperKey(GOOGLE_API_KEY);
     $client->setAccessType('offline');
+    if($access_token){
+      $client->setAccessToken($access_token);
+    }
     return $client;
-
   }
 }
