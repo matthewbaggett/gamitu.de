@@ -16,7 +16,7 @@ class AccountController extends BaseController {
 
   public function BadgesAction(){}
 
-  public function StatisticsAction(){}
+  public function StatsAction(){}
 
   public function ScheduledCheckinsAction(){
     $user                = user::get_current_user();
