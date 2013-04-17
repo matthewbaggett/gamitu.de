@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <?php require("account.navigation.phtml"); ?>
+
+    <div class="span9">
+      <div class="row-fluid">
+        <div class="span12">
+          <h2>Scheduled Checkins</h2>
+          <?php $this->_table($this->events); ?>
+        </div><!--/span-->
+      </div><!--/row-->
+    </div><!--/span-->
+  </div><!--/row-->
+
+<hr>
+
+<footer>
+  <p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
+</footer>
+
