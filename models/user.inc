@@ -7,8 +7,11 @@ class user extends model {
   protected $username;
   protected $password;
   protected $email;
+  protected $_email_type = self::TYPE_TEXT;
   protected $refresh_token;
+  protected $_refresh_token_type = self::TYPE_TEXT;
   protected $access_token;
+  protected $_access_token_type = self::TYPE_TEXT;
   protected $access_token_expiry;
   protected $_access_token_expiry_type = self::TYPE_DATE;
   protected $google_id;
