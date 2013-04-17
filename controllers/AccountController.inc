@@ -19,10 +19,17 @@ class AccountController extends BaseController {
   }
 
   public function FoursquareAttachCompleteAction(){
+    $user = user::get_current_user();
     $code = $_REQUEST['code'];
     $fsq = new EpiFoursquare(FOURSQUARE_ID, FOURSQUARE_SECRET);
-    $token = $fsq->getAccessToken($code, FOURSQUARE_REDIRECT_URL);
-    var_dump($token);
+    $token_response = $fsq->getAccessToken($code, FOURSQUARE_REDIRECT_URL);
+    $foursquare_account = foursquare_account::search()->where('uid', $user->get_uid())->execOne();
+    if(!$foursquare_account){
+      $foursquare_account = new foursquare_account();
+    }
+    $foursquare_account->set_token($token_response->responseText);
+    $foursquare_account->save();
+    header("Location: " . u("Account","Foursquare"));
     exit;
   }
 
