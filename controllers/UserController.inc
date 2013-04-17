@@ -31,7 +31,7 @@ class UserController extends BaseController{
       $user = $g_oauth2->userinfo->get();
 
       // Get access token
-      $access = $g_client->getAccessToken();
+      $access = json_decode($g_client->getAccessToken());
       var_dump($access);exit;
 
       // These fields are currently filtered through the PHP sanitize filters.

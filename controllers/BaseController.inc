@@ -16,7 +16,7 @@ class BaseController{
    * Get a an instance of our Google Client
    * @return Google_Client
    */
-  public function get_google_client($access_token){
+  public function get_google_client($access_token = null){
     $client = new Google_Client();
     $client->setApplicationName(APPLICATION_NAME);
     // Visit https://code.google.com/apis/console?api=plus to generate your
