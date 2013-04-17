@@ -18,13 +18,13 @@
           <div class="span3">
             <dl>
               <dt><?=t("Name")?></dt>
-              <dd><?=$venue->name?></dd>
+              <dd><?=$venue->venue->name?></dd>
               <dt><?=t("ID")?></dt>
-              <dd><?=$venue->id?></dd>
+              <dd><?=$venue->venue->id?></dd>
               <dt><?=t("City")?></dt>
-              <dd><?=$venue->city?></dd>
+              <dd><?=$venue->venue->location->city?></dd>
               <dt><?=t("Country")?></dt>
-              <dd><?=$venue->country?></dd>
+              <dd><?=$venue->venue->location->country?></dd>
             </dl>
           </div><!--/span-->
         <?php endforeach; ?>
