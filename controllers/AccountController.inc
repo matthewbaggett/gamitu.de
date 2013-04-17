@@ -50,7 +50,8 @@ class AccountController extends BaseController {
         'Name' => $venue->venue->name,
         'City' => $venue->venue->location->city,
         'Country' => $venue->venue->location->country,
-        '_Raw' => $venue
+        'Visits' => $venue->beenHere,
+        '_Raw' => $venue,
       );
     }
     ksort($sorted_venue_history);
