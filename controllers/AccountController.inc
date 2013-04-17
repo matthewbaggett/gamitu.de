@@ -50,11 +50,13 @@ class AccountController extends BaseController {
    * @return \TheTwelve\Foursquare\AuthenticationGateway
    */
   public function _FoursquareGetAuthenticationGateway(){
-    $auth = $this->_FoursquareGetApiFactory()->getAuthenticationGateway(
+    $api_factory = $this->_FoursquareGetApiFactory();
+    $auth = $api_factory->getAuthenticationGateway(
       'https://foursquare.com/oauth2/authorize',
       'https://foursquare.com/oauth2/access_token',
       'https://gamitu.de/Account/Foursquare-Attach-Complete'
     );
+    $auth->setClientCredentials(FOURSQUARE_ID, FOURSQUARE_SECRET);
     return $auth;
   }
 
