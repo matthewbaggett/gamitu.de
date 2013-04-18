@@ -195,6 +195,9 @@ class UserController extends BaseController {
       }catch(Google_AuthException $e){
         echo t("FAIL: Auth token invalid") . "\n";
         $g_client = false;
+      }catch(Exception $e){
+        echo "\n";
+        echo "  > " . $e->getmessage()."\n";
       }
       if($g_client){
         $user->update_refresh_token($g_client);
@@ -206,9 +209,9 @@ class UserController extends BaseController {
           $this->UpdateLatitudeFeed($user);
           point::recalculate_point_order();
           $latest_point = $user->get_last_location();
-          echo t("Last seen at @town", array('@town' => $latest_point->get_town() )) . "\n";
+          echo "  > " . t("Last seen at @town", array('@town' => $latest_point->get_town() )) . "\n";
         }catch(Exception $e){
-          $e->getmessage()."\n";
+          echo "  > " . $e->getmessage()."\n";
         }
       }
       echo "\n\n";
