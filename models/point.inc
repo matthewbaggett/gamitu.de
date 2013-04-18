@@ -13,7 +13,7 @@ class point extends model {
   protected $_timestamp_ms_type = model::TYPE_LONGINT;
   protected $hash;
   protected $geolocation;
-  protected $_geolocation_type = model::TYPE_BLOB;
+  protected $_geolocation_type = model::TYPE_TEXT;
   protected $pid_preceding;
   protected $_pid_preceding_type = model::TYPE_INT;
 
@@ -51,8 +51,7 @@ class point extends model {
     $g_maps_geocoding->setLatLng($this->latitude, $this->longitude);
     $g_maps_geocoding->setSensor('true');
     $geocode = $g_maps_geocoding->getResponse();
-
-    var_dump($geocode);exit;ededwsdw
+    return $geocode;
   }
 
   public function get_geolocation() {
