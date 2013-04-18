@@ -211,7 +211,7 @@ class UserController extends BaseController {
           $latest_point = $user->get_last_location();
           echo "  > " . t("Last seen at @town", array('@town' => $latest_point->get_town() )) . "\n";
         }catch(Exception $e){
-          echo "  > " . $e->getmessage()."\n";
+          echo "  > " . $e->getMessage()."\n";
         }
       }
       echo "\n\n";
