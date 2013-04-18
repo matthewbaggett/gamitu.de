@@ -20,7 +20,7 @@ $commands = array(
 
   'rm lib/firephp -Rf',
   'mkdir lib/firephp -p',
-  'cd lib/firephp; pwd; git clone git://github.com/firephp/firephp-core.git . --verbose',
+  'cd lib/firephp; pwd; git clone git@github.com:matthewbaggett/firephp-core.git . --verbose',
 
   'rm lib/foursquare-async -Rf',
   'mkdir lib/foursquare-async -p',
