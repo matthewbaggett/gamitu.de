@@ -44,14 +44,14 @@ class point extends model {
   }
 
   private function _reverse_geolocate() {
-    $geocode = eden('google')
-      ->maps(user::get_current_user()->get_access_token())
-      ->geocoding()
-      ->setLatLng($this->latitude, $this->longitude)
-      ->setSensor('true')
-      ->getResponse();
+    $bc = new BaseController();
+    $g_client = $bc->get_google_client();
+    $g_maps_geocoding = new Eden_Google_Maps_Geocoding($g_client);
+    $g_maps_geocoding->setLatLng($this->latitude, $this->longitude);
+    $g_maps_geocoding->setSensor('true');
+    $geocode = $g_maps_geocoding->getResponse();
 
-    return $geocode;
+    var_dump($geocode);exit;
   }
 
   public function get_geolocation() {
