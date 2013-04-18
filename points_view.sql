@@ -6,7 +6,7 @@ SELECT
   p.latitude,
   p.longitude,
   p.timestamp_ms,
-  from_unixtime(p.timestamp_ms) as time_human
+  from_unixtime(p.timestamp_ms/1000) as time_human
 
 FROM `points` p
 
