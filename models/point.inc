@@ -45,13 +45,20 @@ class point extends model {
   }
 
   private function _reverse_geolocate() {
-    $bc = new BaseController();
-    $g_client = $bc->get_google_client();
-    $g_maps_geocoding = new Eden_Google_Maps_Geocoding($g_client);
-    $g_maps_geocoding->setLatLng($this->latitude, $this->longitude);
-    $g_maps_geocoding->setSensor('true');
-    $geocode = $g_maps_geocoding->getResponse();
-    return $geocode;
+    $endpoint = "http://maps.googleapis.com/maps/api/geocode/json?latlng=".trim($this->latitude).",".trim($this->longitude)."&sensor=false";
+
+    $raw = @file_get_contents($endpoint);
+    $json_data=json_decode($raw);
+
+    if ($json_data->status=="OK") {
+      $fAddress=explode(",", $json_data->results[count($json_data->results)-2]->formatted_address);  //this is human readable address --> getting province name
+      fb::log($fAddress);
+      fb::log($json_data->results);  //dumping result
+      return $json_data;
+    } else {
+      //if no result found, status would be ZERO_RESULTS
+      return false;
+    }
   }
 
   public function get_geolocation() {
