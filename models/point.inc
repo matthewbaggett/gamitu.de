@@ -10,6 +10,7 @@ class point extends model {
   protected $longitude;
   protected $_longitude_type = model::TYPE_COORD;
   protected $timestamp_ms;
+  protected $_timestamp_ms_type = model::TYPE_LONGINT;
   protected $hash;
   protected $geolocation;
   protected $_geolocation_type = model::TYPE_BLOB;
