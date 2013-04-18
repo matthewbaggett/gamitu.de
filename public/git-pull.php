@@ -19,8 +19,8 @@ $commands = array(
   'cd lib/tcore; pwd; git clone git@github.com:matthewbaggett/tcore.git . --verbose',
 
   'rm lib/eden -Rf',
-  'mkdir lib/eden -p',
-  'cd lib/eden; pwd; git clone git@github.com:matthewbaggett/eden.git . --verbose',
+  //'mkdir lib/eden -p',
+  //'cd lib/eden; pwd; git clone git@github.com:matthewbaggett/eden.git . --verbose',
 
   'rm lib/firephp -Rf',
   'mkdir lib/firephp -p',

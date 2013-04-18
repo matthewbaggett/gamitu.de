@@ -51,7 +51,7 @@ class point extends model {
     $g_maps_geocoding->setSensor('true');
     $geocode = $g_maps_geocoding->getResponse();
 
-    var_dump($geocode);exit;
+    var_dump($geocode);exit;ededwsdw
   }
 
   public function get_geolocation() {
