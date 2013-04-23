@@ -112,6 +112,7 @@ class UserController extends BaseController {
       'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
     $locations  = $g_latitude->location->listLocation($options);
+    echo "  > Google gave us " . count($locations['items']) . " new locations\n";
     $this->UpdateLatitudeFeedIterateLocations($user, $locations);
 
     // Process historical locations
@@ -121,6 +122,7 @@ class UserController extends BaseController {
       'max-time' => $oldest_location instanceof point ? $oldest_location->get_timestamp_ms() : null
     );
     $locations  = $g_latitude->location->listLocation($options);
+    echo "  > Google gave us " . count($locations['items']) . " historical locations\n";
     $this->UpdateLatitudeFeedIterateLocations($user, $locations);
   }
 
@@ -138,19 +140,19 @@ class UserController extends BaseController {
 
       if (!$oNewPoint->already_exists()) {
         $oNewPoint->save();
-        echo t("  > Adding point @uid : @lat/@long @ @time", array(
+        echo t("   > Adding point @uid : @lat/@long @ @time, Saved as point @pid", array(
           '@uid' => $oNewPoint->get_uid(),
           '@lat' => $oNewPoint->get_latitude(),
           '@long' => $oNewPoint->get_longitude(),
-          '@time' => $human_time
-        ))."\n";
-        echo t("   > Saved as point @pid", array('@pid' => $oNewPoint->get_pid())) . "\n";
+          '@time' => $human_time,
+          '@pid' => $oNewPoint->get_pid()
+        ));
         $added++;
       } else {
         $ignored++;
       }
     }
-    echo t("Added @added, ignored @ignored", array('@added' => $added, '@ignored' => $ignored)) . "\n\n";
+    echo t("    > Added @added, ignored @ignored", array('@added' => $added, '@ignored' => $ignored)) . "\n\n";
     return array($added, $ignored);
   }
 
