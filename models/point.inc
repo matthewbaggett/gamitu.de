@@ -56,9 +56,9 @@ class point extends model {
     $json_data=json_decode($raw);
 
     if ($json_data->status=="OK") {
-      $fAddress=explode(",", $json_data->results[count($json_data->results)-2]->formatted_address);  //this is human readable address --> getting province name
-      fb::log($fAddress);
-      fb::log($json_data->results);  //dumping result
+      $fAddress = explode(",", $json_data->results[count($json_data->results)-2]->formatted_address);  //this is human readable address --> getting province name
+      \tcore::log($fAddress);
+      \tcore::log($json_data->results);  //dumping result
       return $json_data;
     } else {
       //if no result found, status would be ZERO_RESULTS
@@ -78,7 +78,7 @@ class point extends model {
 
   public function get_town() {
     $geocode = $this->get_geolocation();
-    \fb::log($geocode, "Geocode for {$this->get_pid()}");
+    \tcore::log($geocode, "Geocode for {$this->get_pid()}");
 
     if (isset($geocode['results'][0]['address_components'])) {
       foreach ($geocode['results'][0]['address_components'] as $address_component) {
