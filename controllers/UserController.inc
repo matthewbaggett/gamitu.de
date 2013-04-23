@@ -146,7 +146,7 @@ class UserController extends BaseController {
           '@long' => $oNewPoint->get_longitude(),
           '@time' => $human_time,
           '@pid' => $oNewPoint->get_pid()
-        ));
+        ))."\n";
         $added++;
       } else {
         $ignored++;
@@ -227,7 +227,7 @@ class UserController extends BaseController {
         echo t("OKAY") . "\n";
 
         // Get their locations
-        echo " > " . t("Update Locations") . "... ";
+        echo " > " . t("Update Locations") . "... \n";
         try{
           $this->UpdateLatitudeFeed($user);
           point::recalculate_point_order();
