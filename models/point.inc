@@ -78,6 +78,8 @@ class point extends model {
 
   public function get_town() {
     $geocode = $this->get_geolocation();
+    \fb::log($geocode, "Geocode for {$this->get_pid()}");
+
     if (isset($geocode['results'][0]['address_components'])) {
       foreach ($geocode['results'][0]['address_components'] as $address_component) {
         if ($address_component['types'][0] == 'postal_town') {
@@ -85,7 +87,6 @@ class point extends model {
         }
       }
     }
-
     return "Unknown Town";
   }
 

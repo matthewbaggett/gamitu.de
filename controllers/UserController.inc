@@ -109,7 +109,7 @@ class UserController extends BaseController {
       'max-results' => 1000,
       'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
-    echo "Min-time: {$options['min-time']}\n";
+
     $locations  = $g_latitude->location->listLocation($options);
     $added      = 0;
     $ignored    = 0;
@@ -142,7 +142,6 @@ class UserController extends BaseController {
 
   public function UpdateLatitudeFeedAction() {
     $oUser = user::get_current_user();
-    //list($added, $ignored) = $oUser->update_latitude_locations();
     list($added, $ignored) = $this->UpdateLatitudeFeed($oUser);
     $this->_view->user = $oUser;
     \tcore\tcore::set_message(t("Added @added locations, ignored @ignored locations as duplicates.", array('@added' => $added, '@ignored' => $ignored)));
