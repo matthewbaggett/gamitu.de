@@ -102,4 +102,8 @@ class point extends model {
       }
     }
   }
+
+  public function get_timestamp(){
+    return $this->get_timestamp_ms() / 1000;
+  }
 }

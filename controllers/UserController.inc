@@ -113,11 +113,12 @@ class UserController extends BaseController {
       $oNewPoint->set_latitude($location['latitude']);
       $oNewPoint->set_longitude($location['longitude']);
       $oNewPoint->set_uid($user->get_uid());
+      var_dump($oNewPoint);exit;
       $human_time = date("Y-m-d H:i:s", $oNewPoint->get_timestamp_ms());
 
       if (!$oNewPoint->already_exists()) {
         $oNewPoint->save();
-        echo t("Adding point @uid : @lat/@long @@time", array(
+        echo t("Adding point @uid : @lat/@long @ @time", array(
           '@uid' => $oNewPoint->get_uid(),
           '@lat' => $oNewPoint->get_latitude(),
           '@long' => $oNewPoint->get_longitude(),
