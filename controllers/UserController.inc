@@ -109,6 +109,7 @@ class UserController extends BaseController {
       'max-results' => 1000,
       'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
+    echo "Min-time: {$options['min-time']}\n";
     $locations  = $g_latitude->location->listLocation($options);
     $added      = 0;
     $ignored    = 0;
