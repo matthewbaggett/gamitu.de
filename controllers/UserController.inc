@@ -124,13 +124,13 @@ class UserController extends BaseController {
 
       if (!$oNewPoint->already_exists()) {
         $oNewPoint->save();
-        echo t("Adding point @uid : @lat/@long @ @time", array(
+        echo t("  > Adding point @uid : @lat/@long @ @time", array(
           '@uid' => $oNewPoint->get_uid(),
           '@lat' => $oNewPoint->get_latitude(),
           '@long' => $oNewPoint->get_longitude(),
           '@time' => $human_time
-        ));
-        echo t("Saved as @pid", array('@pid' => $oNewPoint->get_pid())) . "\n";
+        ))."\n";
+        echo t("   > Saved as point @pid", array('@pid' => $oNewPoint->get_pid())) . "\n";
         $added++;
       } else {
         $ignored++;
