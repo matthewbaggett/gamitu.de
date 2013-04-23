@@ -6,5 +6,6 @@
 		"gamitude" //db
 );
 
-attempt_define("TCORE_LOGGING_ENABLED", false);
+attempt_define("TCORE_LOGGING_FILE_ENABLED", false);
+attempt_define("TCORE_LOGGING_FIREPHP_ENABLED", true);
 	
