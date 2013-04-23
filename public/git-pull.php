@@ -10,7 +10,7 @@ $libraries = array(
   "firephp" => "git@github.com:matthewbaggett/firephp-core.git",
   "foursquare-async" => "git://github.com/jmathai/foursquare-async.git",
   "krumo" => "https://github.com/tony/krumo.git",
-  "pretty-exceptions" => "git://github.com/phalcon/pretty-exceptions.git",
+  "pretty-exceptions" => "git://github.com/matthewbaggett/pretty-exceptions.git",
 );
 
 // The commands
