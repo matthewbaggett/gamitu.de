@@ -28,7 +28,10 @@ class point extends model {
   public function already_exists() {
     $this->generate_hash();
     $matching_point = point::search()
-      ->where('hash', $this->hash)
+      ->where('uid', $this->get_uid())
+      ->where('latitude', $this->get_latitude())
+      ->where('longitude', $this->get_longitude())
+      ->where('datetime', $this->get_datetime())
       ->execOne();
     if ($matching_point) {
       return true;
