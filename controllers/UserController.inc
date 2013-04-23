@@ -185,6 +185,7 @@ class UserController extends BaseController {
 
   public function CronAction() {
     $users = user::get_all_users();
+    shuffle($users);
     foreach ($users as $user) {
       $user = user::cast($user);
 
