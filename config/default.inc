@@ -18,7 +18,6 @@ define("FOURSQUARE_SECRET", "2UZWRFA2WL2UK4N1LCF3SBLPLNF0IBMI4BGD04S1QWC0VNTA");
 define("FOURSQUARE_REDIRECT_URL", "https://gamitu.de/Account/Foursquare-Attach-Complete");
 
 // Default configuration options
-\fb::setEnabled(FALSE);
 \fb::setEnabled(TRUE);
 
 \tcore\tcore::get_view()
