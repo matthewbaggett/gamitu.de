@@ -5,6 +5,14 @@ if ((!isset($_REQUEST['password']) || $_REQUEST['password'] !== 'kU4EdRaw') && P
 chdir("../");
 ob_start();
 
+$libraries = array(
+  "tcore" => "git@github.com:matthewbaggett/tcore.git",
+  "firephp" => "git@github.com:matthewbaggett/firephp-core.git",
+  "foursquare-async" => "git://github.com/jmathai/foursquare-async.git",
+  "krumo" => "https://github.com/tony/krumo.git",
+  "pretty-exceptions" => "git://github.com/phalcon/pretty-exceptions.git",
+);
+
 // The commands
 $commands = array(
   'echo $PWD',
@@ -13,23 +21,15 @@ $commands = array(
   'git status',
   'git pull',
   'git status',
-
-  'rm lib/tcore -Rf',
-  'mkdir lib/tcore -p',
-  'cd lib/tcore; pwd; git clone git@github.com:matthewbaggett/tcore.git . --verbose',
-
-  'rm lib/firephp -Rf',
-  'mkdir lib/firephp -p',
-  'cd lib/firephp; pwd; git clone git@github.com:matthewbaggett/firephp-core.git . --verbose',
-
-  'rm lib/foursquare-async -Rf',
-  'mkdir lib/foursquare-async -p',
-  'cd lib/foursquare-async; pwd; git clone git://github.com/jmathai/foursquare-async.git . --verbose',
-
-  'rm lib/krumo -Rf',
-  'mkdir lib/krumo -p',
-  'cd lib/krumo; pwd; git clone https://github.com/tony/krumo.git . --verbose',
 );
+
+foreach($libraries as $name => $location){
+  if(file_exists("lib/{$name}")){
+    $commands[] = "cd lib/{$name}; git pull";
+  }else{
+    $commands[] = "mkdir lib/{$name} -p; cd lib/{$name}; pwd; git clone {$location} . --verbose";
+  }
+}
 
 // Run the commands for output
 $output = '';
