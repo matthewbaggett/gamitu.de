@@ -6,16 +6,16 @@ SELECT
   p_a.latitude as lat1,
   p_a.longitude as long1,
   p_a.timestamp_ms as time1,
-  from_unixtime(p_a.timestamp_ms/1000) as time_human_1,
+  p_a.datetime as time_human_1,
   p_b.pid as pid2,
   p_b.latitude as lat2,
   p_b.longitude as long2,
   p_b.timestamp_ms as time2,
-  from_unixtime(p_b.timestamp_ms/1000) as time_human_2,
+  p_b.datetime as time_human_2,
   
   p_a.latitude - p_b.latitude as lat_delta,
   p_a.longitude - p_b.longitude as long_delta,
-  p_a.timestamp_ms - p_b.timestamp_ms as time_delta,
+  p_a.datetime - p_b.datetime as time_delta,
   
   ( 3959 * acos( cos( radians(p_b.latitude) ) 
                * cos( radians( p_a.latitude ) ) 
