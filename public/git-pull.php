@@ -28,7 +28,7 @@ $commands = array(
 
   'rm lib/krumo -Rf',
   'mkdir lib/krumo -p',
-  'cd lib/krumo; pwd; git clone git://github.com/tony/krumo.git . --verbose',
+  'cd lib/krumo; pwd; git clone https://github.com/tony/krumo.git . --verbose',
 );
 
 // Run the commands for output
