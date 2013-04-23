@@ -24,7 +24,11 @@ $commands = array(
 
   'rm lib/foursquare-async -Rf',
   'mkdir lib/foursquare-async -p',
-  'cd lib/foursquare-async; pwd; git clone git://github.com/jmathai/foursquare-async.git . --verbose'
+  'cd lib/foursquare-async; pwd; git clone git://github.com/jmathai/foursquare-async.git . --verbose',
+
+  'rm lib/krumo -Rf',
+  'mkdir lib/krumo -p',
+  'cd lib/krumo; pwd; git clone git://github.com/tony/krumo.git . --verbose',
 );
 
 // Run the commands for output
