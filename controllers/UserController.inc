@@ -104,7 +104,12 @@ class UserController extends BaseController {
 
     $g_client   = $this->get_google_client($user->get_access_token());
     $g_latitude = new Google_LatitudeService($g_client);
-    $locations  = $g_latitude->location->listLocation(array('max-results' => 1000));
+    $last_location = $user->get_last_location();
+    $options = array(
+      'max-results' => 1000,
+      'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
+    );
+    $locations  = $g_latitude->location->listLocation($options);
     $added      = 0;
     $ignored    = 0;
     foreach ($locations['items'] as $location) {
