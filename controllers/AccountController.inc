@@ -63,7 +63,10 @@ class AccountController extends BaseController {
     $this->_view->venue_history = array_values($sorted_venue_history);
   }
 
-  public function DataAction(){}
+  public function DataAction(){
+    $data = point::search()->where('uid', user::get_current_user()->get_uid())->exec();
+    $this->_view->data = $data;
+  }
 
   public function BadgesAction(){}
 
