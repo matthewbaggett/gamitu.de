@@ -104,13 +104,27 @@ class UserController extends BaseController {
 
     $g_client   = $this->get_google_client($user->get_access_token());
     $g_latitude = new Google_LatitudeService($g_client);
+
+    // Process new locations
     $last_location = $user->get_last_location();
     $options = array(
       'max-results' => 1000,
       'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
-
     $locations  = $g_latitude->location->listLocation($options);
+    $this->UpdateLatitudeFeedIterateLocations($user, $locations);
+
+    // Process historical locations
+    $oldest_location = $user->get_oldest_location();
+    $options = array(
+      'max-results' => 1000,
+      'max-time' => $oldest_location instanceof point ? $oldest_location->get_timestamp_ms() : null
+    );
+    $locations  = $g_latitude->location->listLocation($options);
+    $this->UpdateLatitudeFeedIterateLocations($user, $locations);
+  }
+
+  private function UpdateLatitudeFeedIterateLocations(user $user, $locations){
     $added      = 0;
     $ignored    = 0;
     foreach ($locations['items'] as $location) {
