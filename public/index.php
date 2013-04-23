@@ -7,8 +7,6 @@ ini_set('memory_limit', '2G');
 // Include t-core
 require_once("../lib/tcore/bootstrap.inc");
 
-\tcore\tcore::configure();
-
 // Include Google PHP library
 require_once('../lib/google-api-php-client/src/Google_Client.php');
 require_once('../lib/google-api-php-client/src/contrib/Google_PlusService.php');
@@ -20,4 +18,5 @@ require_once("../lib/foursquare-async/EpiCurl.php");
 require_once("../lib/foursquare-async/EpiSequence.php");
 require_once("../lib/foursquare-async/EpiFoursquare.php");
 
+\tcore\tcore::configure();
 \tcore\tcore::run();
