@@ -108,7 +108,7 @@ class UserController extends BaseController {
     // Process new locations
     $last_location = $user->get_last_location();
     $options = array(
-      'max-results' => 1000,
+      'max-results' => GOOGLE_LATITUDE_MAX_PER_REQUEST,
       'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
     $locations  = $g_latitude->location->listLocation($options);
@@ -118,7 +118,7 @@ class UserController extends BaseController {
     // Process historical locations
     $oldest_location = $user->get_oldest_location();
     $options = array(
-      'max-results' => 1000,
+      'max-results' => GOOGLE_LATITUDE_MAX_PER_REQUEST,
       'max-time' => $oldest_location instanceof point ? $oldest_location->get_timestamp_ms() : null
     );
     $locations  = $g_latitude->location->listLocation($options);

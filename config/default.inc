@@ -11,6 +11,7 @@ attempt_define("GOOGLE_CLIENT_ID",'692588353126.apps.googleusercontent.com');
 attempt_define("GOOGLE_CLIENT_SECRET",'MuzN_JnyjmaVZuL5zEfhhcQ1');
 attempt_define("GOOGLE_API_KEY","AIzaSyAOp7CgK7IF_w97D_BIcU7iSb_544FOZro");
 attempt_define("GOOGLE_LOGIN_REDIRECT",'http://gamitu.de/user/register-google');
+attempt_define("GOOGLE_LATITUDE_MAX_PER_REQUEST", 50); // Hard-Max is 1000.
 
 // Define 4SQ api things
 define("FOURSQUARE_ID", "A0E0UFLSVUV45SMMCD0O0J4OIO0I3OFJJB5U3SZ0IFSVNYJC");
