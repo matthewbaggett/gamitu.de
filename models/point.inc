@@ -94,7 +94,7 @@ class point extends model {
    * Process & recalculate point ordering.
    */
   static public function recalculate_point_order() {
-    $orphan_points = point::search()->where('pid_preceding', '')->exec();
+    $orphan_points = point::search()->where('pid_preceding', 0)->exec();
 
     foreach ($orphan_points as $orphan_point) {
       $preceding_point = point::search()
