@@ -213,10 +213,12 @@ class UserController extends BaseController {
         ->execOne();
       if ($preceding_point) {
         echo "{$preceding_point->get_pid()} => {$point_with_no_preceding_point->get_pid()}\n";
-        $point_with_no_preceding_point->set_pid_preceding($preceding_point->get_pid());
-        $point_with_no_preceding_point->save();
+
+        db::get_instance()
+          ->query("UPDATE points WHERE pid = {$point_with_no_preceding_point->get_pid()} SET pid_preceding = {$preceding_point->get_pid()}");
+
       } else {
-        echo "Could not find preceding point for {$point_with_no_preceding_point->pid}\n";
+        echo "Could not find preceding point for {$point_with_no_preceding_point->get_pid()}\n";
       }
     }
     exit;
