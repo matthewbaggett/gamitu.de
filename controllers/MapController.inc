@@ -28,7 +28,7 @@ class MapController extends BaseController {
     $pids_results = \tcore\db::get_instance()->query($sql_pid_seek);
 
     foreach($pids_results->fetchAll() as $pid_result){
-      $pids[] = $pid_result['pid'];
+      $pids[] = $pid_result->pid;
     }
     var_dump($pids);
 
