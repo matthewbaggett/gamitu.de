@@ -214,7 +214,7 @@ class UserController extends BaseController {
       if ($preceding_point) {
         echo "{$preceding_point->get_pid()} => {$point_with_no_preceding_point->get_pid()}\n";
 
-        db::get_instance()
+        \tcore\db::get_instance()
           ->query("UPDATE points WHERE pid = {$point_with_no_preceding_point->get_pid()} SET pid_preceding = {$preceding_point->get_pid()}");
 
       } else {
