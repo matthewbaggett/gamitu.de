@@ -24,7 +24,7 @@ class MapController extends BaseController {
     $pids = \tcore\db::get_instance()->query("SELECT pid FROM points_view WHERE time_human < {$str_end} AND time_human > {$str_start}");
 
     $points = point::search()->where('pid',$pids,'IN')->order('time_human','ASC')->exec();
-    krumo($points);
+    var_dump($points);
     exit;
 
   }
