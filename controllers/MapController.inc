@@ -13,15 +13,33 @@ class MapController extends BaseController {
     }else{
       $start = strtotime("24 hours ago");
     }
+
     if(isset($_GET['end'])){
       $end = strtotime($_GET['end']);
     }else{
       $end = time();
     }
+
+    if(isset($_GET['user_id'])){
+      $user_id = intval($_GET['user_id']);
+      $interrogated_user = user::search()->where('uid', $user_id)->execOne();
+    }else{
+      $interrogated_user = user::get_current_user();
+    }
+
     $str_start  = date("Y-m-d H:i:s", $start);
     $str_end    = date("Y-m-d H:i:s", $end);
 
-    $sql_pid_seek = "SELECT pid FROM points_view WHERE time_human < '{$str_end}' AND time_human > '{$str_start}'";
+    $sql_pid_seek = "
+      SELECT
+        pid
+      FROM
+        points_view
+      WHERE
+        uid = {$interrogated_user->get_uid()}
+        AND time_human < '{$str_end}'
+        AND time_human > '{$str_start}'
+      ";
 
     $pids_results = \tcore\db::get_instance()->query($sql_pid_seek);
 
@@ -35,6 +53,10 @@ class MapController extends BaseController {
       ->where('pid', $this->_view->pids, 'IN')
       ->order('timestamp_ms', 'ASC')
       ->exec();
+
+    $this->_view->user = $interrogated_user;
+    $this->_view->start = $start;
+    $this->_view->end = $end;
 
   }
 }

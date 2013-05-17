@@ -1,5 +1,5 @@
 <?php krumo($this); ?>
-
+<h1><?php $this->user->get_username();?>'s Travel between <?php echo date("Y-m-d H:i:s", $this->start) ?> and <?php echo date("Y-m-d H:i:s", $this->end) ?> </h1>
 
 <div class="big_map_canvas" id="map_canvas"></div>
 <hr>
