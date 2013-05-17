@@ -3,8 +3,8 @@
 class UserController extends BaseController {
 
   public function RegisterGoogleAction() {
-    $g_client = $this->get_google_client();
-    $g_oauth2 = new Google_Oauth2Service($g_client);
+    $g_client   = $this->get_google_client();
+    $g_oauth2   = new Google_Oauth2Service($g_client);
     $g_latitude = new Google_LatitudeService($g_client);
 
     //if no code and no session
@@ -107,28 +107,28 @@ class UserController extends BaseController {
 
     // Process new locations
     $last_location = $user->get_last_location();
-    $options = array(
+    $options       = array(
       'max-results' => GOOGLE_LATITUDE_MAX_PER_REQUEST,
-      'min-time' => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
+      'min-time'    => $last_location instanceof point ? $last_location->get_timestamp_ms() : null
     );
-    $locations  = $g_latitude->location->listLocation($options);
+    $locations     = $g_latitude->location->listLocation($options);
     echo "  > Google gave us " . count($locations['items']) . " new locations\n";
     $this->UpdateLatitudeFeedIterateLocations($user, $locations);
 
     // Process historical locations
     $oldest_location = $user->get_oldest_location();
-    $options = array(
+    $options         = array(
       'max-results' => GOOGLE_LATITUDE_MAX_PER_REQUEST,
-      'max-time' => $oldest_location instanceof point ? $oldest_location->get_timestamp_ms() : null
+      'max-time'    => $oldest_location instanceof point ? $oldest_location->get_timestamp_ms() : null
     );
-    $locations  = $g_latitude->location->listLocation($options);
+    $locations       = $g_latitude->location->listLocation($options);
     echo "  > Google gave us " . count($locations['items']) . " historical locations\n";
     $this->UpdateLatitudeFeedIterateLocations($user, $locations);
   }
 
-  private function UpdateLatitudeFeedIterateLocations(user $user, $locations){
-    $added      = 0;
-    $ignored    = 0;
+  private function UpdateLatitudeFeedIterateLocations(user $user, $locations) {
+    $added   = 0;
+    $ignored = 0;
     foreach ($locations['items'] as $location) {
       $oNewPoint = new point();
       $oNewPoint->set_timestamp_ms($location['timestampMs']);
@@ -141,12 +141,12 @@ class UserController extends BaseController {
       if (!$oNewPoint->already_exists()) {
         $oNewPoint->save();
         echo t("   > Adding point: user #@uid, (@lat, @long) @ @time, Saved as point @pid", array(
-          '@uid' => $oNewPoint->get_uid(),
-          '@lat' => $oNewPoint->get_latitude(),
+          '@uid'  => $oNewPoint->get_uid(),
+          '@lat'  => $oNewPoint->get_latitude(),
           '@long' => $oNewPoint->get_longitude(),
           '@time' => $human_time,
-          '@pid' => $oNewPoint->get_pid()
-        ))."\n";
+          '@pid'  => $oNewPoint->get_pid()
+        )) . "\n";
         $added++;
       } else {
         $ignored++;
@@ -210,31 +210,31 @@ class UserController extends BaseController {
     foreach ($users as $user) {
       $user = user::cast($user);
 
-      echo t("Processing @firstname @surname", array('@firstname' => $user->get_firstname(), '@surname' => $user->get_surname()))."\n";
+      echo t("Processing @firstname @surname", array('@firstname' => $user->get_firstname(), '@surname' => $user->get_surname())) . "\n";
 
       echo " > " . t("Refresh Token") . "... ";
-      try{
+      try {
         $g_client = $this->get_google_client($user->get_access_token());
-      }catch(Google_AuthException $e){
+      } catch (Google_AuthException $e) {
         echo t("FAIL: Auth token invalid") . "\n";
         $g_client = false;
-      }catch(Exception $e){
+      } catch (Exception $e) {
         echo "\n";
-        echo "  > " . $e->getmessage()."\n";
+        echo "  > " . $e->getmessage() . "\n";
       }
-      if($g_client){
+      if ($g_client) {
         $user->update_refresh_token($g_client);
         echo t("OKAY") . "\n";
 
         // Get their locations
         echo " > " . t("Update Locations") . "... \n";
-        try{
+        try {
           $this->UpdateLatitudeFeed($user);
           point::recalculate_point_order();
           $latest_point = $user->get_last_location();
-          echo "  > " . t("Last seen at @town", array('@town' => $latest_point->get_town() )) . "\n";
-        }catch(Exception $e){
-          echo "  > " . $e->getMessage()."\n";
+          echo "  > " . t("Last seen at @town", array('@town' => $latest_point->get_town())) . "\n";
+        } catch (Exception $e) {
+          echo "  > " . $e->getMessage() . "\n";
         }
       }
       echo "\n\n";

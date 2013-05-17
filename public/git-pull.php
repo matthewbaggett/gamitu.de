@@ -6,10 +6,10 @@ chdir("../");
 ob_start();
 
 $libraries = array(
-  "tcore" => "git@github.com:matthewbaggett/tcore.git",
-  "firephp" => "git@github.com:matthewbaggett/firephp-core.git",
-  "foursquare-async" => "git://github.com/jmathai/foursquare-async.git",
-  "krumo" => "https://github.com/tony/krumo.git",
+  "tcore"             => "git@github.com:matthewbaggett/tcore.git",
+  "firephp"           => "git@github.com:matthewbaggett/firephp-core.git",
+  "foursquare-async"  => "git://github.com/jmathai/foursquare-async.git",
+  "krumo"             => "https://github.com/tony/krumo.git",
   "pretty-exceptions" => "git://github.com/matthewbaggett/pretty-exceptions.git",
 );
 
@@ -23,10 +23,10 @@ $commands = array(
   'git status',
 );
 
-foreach($libraries as $name => $location){
-  if(file_exists("lib/{$name}")){
+foreach ($libraries as $name => $location) {
+  if (file_exists("lib/{$name}")) {
     $commands[] = "cd lib/{$name}; git pull";
-  }else{
+  } else {
     $commands[] = "mkdir lib/{$name} -p; cd lib/{$name}; pwd; git clone {$location} . --verbose";
   }
 }
@@ -41,43 +41,43 @@ foreach ($commands AS $command) {
   $output .= htmlentities(trim($tmp)) . "\n";
 }
 
-if(PHP_SAPI !== 'cli'){
-?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<title>GIT DEPLOYMENT SCRIPT</title>
-</head>
-<body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
+if (PHP_SAPI !== 'cli') {
+  ?>
+  <!DOCTYPE HTML>
+  <html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>GIT DEPLOYMENT SCRIPT</title>
+  </head>
+  <body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
 <pre>
  .  ____  .    ____________________________
  |/      \|   |                            |
-[| <span style="color: #FF0000;">&hearts;    &hearts;</span> |]  | Git Deployment Script v0.1 |
- |___==___|  /              &copy; oodavid 2012 |
+[| <span style="color: #FF0000;">&hearts; &hearts;</span> |]  | Git Deployment Script v0.1 |
+ |___==___|  / &copy; oodavid 2012 |
               |____________________________|
 
-<?php echo $output; ?>
+  <?php echo $output; ?>
 </pre>
-</body>
-</html>
-<?php
-    $output = ob_get_contents();
-    ob_end_clean();
+  </body>
+  </html>
+  <?php
+  $output = ob_get_contents();
+  ob_end_clean();
 }
 echo $output;
 
 $to = "matthew@baggett.me";
 // To send HTML mail, the Content-type header must be set
-$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'To: ' . $to . "\r\n";
 $headers .= 'From: GitHub AutoDeploy on ' . gethostname() . " <service@gamitu.de>\r\n";
 
 mail(
-    $to,
-    "Deployment on ".gethostname()." at " . date("d/m/Y H:i:s"),
-    $output, 
-    $headers
+  $to,
+  "Deployment on " . gethostname() . " at " . date("d/m/Y H:i:s"),
+  $output,
+  $headers
 );
 ?>

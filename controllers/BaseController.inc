@@ -4,7 +4,7 @@ class BaseController {
   protected $_view;
 
   public function __construct($view = null) {
-    if($view !== null){
+    if ($view !== null) {
       $this->_view = $view;
     }
 
