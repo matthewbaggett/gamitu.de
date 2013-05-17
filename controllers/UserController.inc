@@ -217,10 +217,10 @@ class UserController extends BaseController {
         $sql = "
           UPDATE
             points
-          WHERE
-            pid = {$point_with_no_preceding_point->get_pid()}
           SET
             pid_preceding = {$preceding_point->get_pid()}
+          WHERE
+            pid = {$point_with_no_preceding_point->get_pid()}
         ";
         echo $sql;
         \tcore\db::get_instance()
