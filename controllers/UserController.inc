@@ -204,8 +204,8 @@ class UserController extends BaseController {
     }
   }
 
-  public function FixOrderAction() {
-    foreach (point::search()->where('pid_preceding', '')->limit(100)->exec() as $point_with_no_preceding_point) {
+  public function FixPointOrderAction() {
+    foreach (point::search()->where('pid_preceding', '')->limit(1000)->exec() as $point_with_no_preceding_point) {
       $preceding_point = point::search()
         ->where('timestamp_ms', $point_with_no_preceding_point->get_timestamp_ms(), '<')
         ->order('timestamp_ms', 'DESC')
@@ -215,17 +215,12 @@ class UserController extends BaseController {
         echo "{$preceding_point->get_pid()} => {$point_with_no_preceding_point->get_pid()}\n";
 
         $sql = "
-          UPDATE
-            points
-          SET
-            pid_preceding = {$preceding_point->get_pid()}
-          WHERE
-            pid = {$point_with_no_preceding_point->get_pid()}
+          UPDATE points
+          SET pid_preceding = {$preceding_point->get_pid()}
+          WHERE pid = {$point_with_no_preceding_point->get_pid()}
         ";
-        echo $sql;
-        \tcore\db::get_instance()
-          ->query($sql);
 
+        \tcore\db::get_instance()->query($sql);
       } else {
         echo "Could not find preceding point for {$point_with_no_preceding_point->get_pid()}\n";
       }
