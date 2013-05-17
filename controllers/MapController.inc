@@ -23,19 +23,18 @@ class MapController extends BaseController {
 
     $sql_pid_seek = "SELECT pid FROM points_view WHERE time_human < '{$str_end}' AND time_human > '{$str_start}'";
 
-    echo $sql_pid_seek;
-
     $pids_results = \tcore\db::get_instance()->query($sql_pid_seek);
 
+    $this->_view->pids = array();
+
     foreach($pids_results->fetchAll() as $pid_result){
-      $pids[] = $pid_result->pid;
+      $this->_view->pids[] = $pid_result->pid;
     }
 
-    $points = point::search()
-      ->where('pid', $pids, 'IN')
+    $this->_view->points = point::search()
+      ->where('pid', $this->_view->pids, 'IN')
       ->order('time_human', 'ASC')
       ->exec();
-    $this->_view->points = $points;
 
   }
 }
