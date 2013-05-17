@@ -1,6 +1,6 @@
 <?php $messages = (array)\tcore\tcore::get_messages(); ?>
 <?php if(is_array($messages)): ?>
-  <?php foreach ( as $message): ?>
+  <?php foreach ($messages as $message): ?>
     <div class="alert alert-<?php echo $message->type ?>">
       <?php echo $message->message; ?>
     </div>
