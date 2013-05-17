@@ -30,13 +30,12 @@ class MapController extends BaseController {
     foreach($pids_results->fetchAll() as $pid_result){
       $pids[] = $pid_result->pid;
     }
-    var_dump($pids);
 
-    $points = point::search()->where('pid', $pids, 'IN')->order('time_human', 'ASC')->exec();
-    foreach($points as $point){
-      var_dump($point);
-    }
-    exit;
+    $points = point::search()
+      ->where('pid', $pids, 'IN')
+      ->order('time_human', 'ASC')
+      ->exec();
+    $this->_view->points = $points;
 
   }
 }
