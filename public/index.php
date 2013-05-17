@@ -2,7 +2,7 @@
 ini_set('display_errors', true);
 ini_set('display_startup_errors', true);
 ini_set('memory_limit', '2G');
-
+error_reporting(E_ALL);
 
 // Include t-core
 require_once("../lib/tcore/bootstrap.inc");
