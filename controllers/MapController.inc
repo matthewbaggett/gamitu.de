@@ -33,7 +33,7 @@ class MapController extends BaseController {
 
     $this->_view->points = point::search()
       ->where('pid', $this->_view->pids, 'IN')
-      ->order('time_human', 'ASC')
+      ->order('timestamp_ms', 'ASC')
       ->exec();
 
   }
