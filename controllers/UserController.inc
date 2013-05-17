@@ -205,7 +205,7 @@ class UserController extends BaseController {
   }
 
   public function FixOrderAction() {
-    foreach (point::search()->where('pid_preceding', '')->exec() as $point_with_no_preceding_point) {
+    foreach (point::search()->where('pid_preceding', '')->limit(100)->exec() as $point_with_no_preceding_point) {
       $preceding_point = point::search()
         ->where('timestamp_ms', $point_with_no_preceding_point->get_timestamp_ms(), '<')
         ->order('timestamp_ms', 'DESC')
