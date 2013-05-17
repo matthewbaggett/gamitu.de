@@ -222,6 +222,7 @@ class UserController extends BaseController {
         echo "\n";
         echo "  > " . $e->getmessage() . "\n";
       }
+      var_dump($g_client);die("got a gclient");
       if ($g_client) {
         $user->update_refresh_token($g_client);
         echo t("OKAY") . "\n";
@@ -238,10 +239,7 @@ class UserController extends BaseController {
         }
       }
       echo "\n\n";
-
     }
     exit;
   }
-
-
 }
