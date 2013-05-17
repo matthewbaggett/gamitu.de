@@ -21,7 +21,7 @@ class MapController extends BaseController {
     $str_start  = date("Y-m-d H:i:s", $start);
     $str_end    = date("Y-m-d H:i:s", $end);
 
-    $sql_pid_seek = "SELECT pid FROM points_view WHERE time_human < {$str_end} AND time_human > {$str_start}";
+    $sql_pid_seek = "SELECT pid FROM points_view WHERE time_human < '{$str_end}' AND time_human > '{$str_start}'";
 
     echo $sql_pid_seek;
 
@@ -29,7 +29,7 @@ class MapController extends BaseController {
 
     var_dump($pids);
 
-    $points = point::search()->where('pid',$pids,'IN')->order('time_human','ASC')->exec();
+    $points = point::search()->where('pid', $pids, 'IN')->order('time_human', 'ASC')->exec();
     var_dump($points);
     exit;
 
