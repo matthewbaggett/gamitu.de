@@ -39,6 +39,7 @@ class MapController extends BaseController {
         uid = {$interrogated_user->get_uid()}
         AND time_human < '{$str_end}'
         AND time_human > '{$str_start}'
+        AND changed_state = 'Yes'
       ";
 
     $pids_results = \tcore\db::get_instance()->query($sql_pid_seek);
