@@ -12,8 +12,26 @@
       center: new google.maps.LatLng(-34.397, 150.644),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById('map_canvas'),
-      mapOptions);
+    map = new google.maps.Map(
+      document.getElementById('map_canvas'),
+      mapOptions
+    );
+
+    var routeCoordinates = [
+      <?php foreach($this->points as $point): ?>
+        <?php echo $point->get_google_maps_lat_lng(); ?>,
+      <?php endforeach; ?>
+    ];
+
+    var routePath = new google.maps.Polyline({
+      path: routeCoordinates,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+
+    routePath.setMap(map);
+
   }
   jQuery(document).ready(function(){
     google.maps.event.addDomListener(window, 'load', initialize);

@@ -112,4 +112,8 @@ class point extends model {
   public function get_timestamp(){
     return $this->get_timestamp_ms() / 1000;
   }
+
+  public function get_google_maps_lat_lng(){
+    return "new google.maps.LatLng({$this->get_latitude()}, {$this->get_longitude()})";
+  }
 }
