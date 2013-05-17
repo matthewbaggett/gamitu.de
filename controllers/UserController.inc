@@ -207,15 +207,15 @@ class UserController extends BaseController {
   public function FixOrderAction() {
     foreach (point::search()->where('pid_preceding', '')->exec() as $point_with_no_preceding_point) {
       $preceding_point = point::search()
-        ->where('timestamp_ms',$point_with_no_preceding_point->timestamp_ms,'<')
-        ->order('timestamp_ms','DESC')
-        ->where('uid',$point_with_no_preceding_point->uid)
+        ->where('timestamp_ms', $point_with_no_preceding_point->get_timestamp_ms(), '<')
+        ->order('timestamp_ms', 'DESC')
+        ->where('uid', $point_with_no_preceding_point->get_uid())
         ->execOne();
-      if($preceding_point){
-        echo "{$preceding_point->pid} => {$point_with_no_preceding_point->pid}\n";
-        $point_with_no_preceding_point->pid_preceding = $preceding_point->pid;
+      if ($preceding_point) {
+        echo "{$preceding_point->get_pid()} => {$point_with_no_preceding_point->get_pid()}\n";
+        $point_with_no_preceding_point->set_pid_preceding($preceding_point->get_pid);
         $point_with_no_preceding_point->save();
-      }else{
+      } else {
         echo "Could not find preceding point for {$point_with_no_preceding_point->pid}\n";
       }
     }
