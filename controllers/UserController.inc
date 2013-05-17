@@ -222,7 +222,8 @@ class UserController extends BaseController {
         echo "\n";
         echo "  > " . $e->getmessage() . "\n";
       }
-      var_dump($g_client);die("got a gclient");
+      flush();
+      //var_dump($g_client);die("got a gclient");
       if ($g_client) {
         $user->update_refresh_token($g_client);
         echo t("OKAY") . "\n";
@@ -231,7 +232,6 @@ class UserController extends BaseController {
         echo " > " . t("Update Locations") . "... \n";
         try {
           $this->UpdateLatitudeFeed($user);
-          point::recalculate_point_order();
           $latest_point = $user->get_last_location();
           echo "  > " . t("Last seen at @town", array('@town' => $latest_point->get_town())) . "\n";
         } catch (Exception $e) {
