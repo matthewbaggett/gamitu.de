@@ -25,12 +25,17 @@ class MapController extends BaseController {
 
     echo $sql_pid_seek;
 
-    $pids = \tcore\db::get_instance()->query($sql_pid_seek);
+    $pids_results = \tcore\db::get_instance()->query($sql_pid_seek);
 
+    foreach($pids_results->fetchAll() as $pid_result){
+      $pids[] = $pid_result['pid'];
+    }
     var_dump($pids);
 
     $points = point::search()->where('pid', $pids, 'IN')->order('time_human', 'ASC')->exec();
-    var_dump($points);
+    foreach($points as $point){
+      var_dump($point);
+    }
     exit;
 
   }
