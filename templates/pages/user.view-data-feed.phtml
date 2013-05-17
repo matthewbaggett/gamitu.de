@@ -1,50 +1,50 @@
-	<table class="table table-bordered table-compact">
-		<thead>
-			<tr>
-				<th>Date &amp; Time</th>
-				<th>Delta</th>
-				<th>Latitude &amp; Longitude</th>
-				<th>Delta</th>
-				<th>Distance (miles/kilometers)</th>
-				<th>Speed (mph/kph)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach($this->feed as $position):?>
-				<?php 
-				$classes = array();
-				$delta = $this->deltas[$position->get_pid()];
-				if($delta->delta_latlong <> 0){
-					$classes[] = "success";
-				}
-				?>
-				<tr class="<?=implode(" ",$classes)?>">
-					<td>
-						<?=date("Y-m-d H:i:s", $position->get_timestamp_ms());?>
-					</td>
-					<td>
-						<?=$delta->delta_timestamp_ms?round($delta->delta_timestamp_ms):'N/A'?> sec
-					</td>
-					<td>
-						<a href="/map/view-location?ll=<?=$position->get_latitude();?>,<?=$position->get_longitude();?>">
-							<?=$position->get_latitude();?>,<?=$position->get_longitude();?>
-						</a>
-					</td>
-					<td>
-						<?=isset($delta->delta_lat)?$delta->delta_lat:'0'?>,
-						<?=isset($delta->delta_long)?$delta->delta_long:'0'?>
-					</td>
-					<td><?=$delta->delta_distance_miles?>/<?=$delta->delta_distance_kilometers?></td>
-					<td><?=$delta->miles_per_hour?>/<?=$delta->kilometers_per_hour?></td>
-				</tr>
-				<?php $prev = $position;?>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-	
-	<hr>
+<table class="table table-bordered table-compact">
+  <thead>
+  <tr>
+    <th>Date &amp; Time</th>
+    <th>Delta</th>
+    <th>Latitude &amp; Longitude</th>
+    <th>Delta</th>
+    <th>Distance (miles/kilometers)</th>
+    <th>Speed (mph/kph)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($this->feed as $position): ?>
+    <?php
+    $classes = array();
+    $delta   = $this->deltas[$position->get_pid()];
+    if ($delta->delta_latlong <> 0) {
+      $classes[] = "success";
+    }
+    ?>
+    <tr class="<?= implode(" ", $classes) ?>">
+      <td>
+        <?= date("Y-m-d H:i:s", $position->get_timestamp_ms()); ?>
+      </td>
+      <td>
+        <?= $delta->delta_timestamp_ms ? round($delta->delta_timestamp_ms) : 'N/A' ?> sec
+      </td>
+      <td>
+        <a href="/map/view-location?ll=<?= $position->get_latitude(); ?>,<?= $position->get_longitude(); ?>">
+          <?= $position->get_latitude(); ?>,<?= $position->get_longitude(); ?>
+        </a>
+      </td>
+      <td>
+        <?= isset($delta->delta_lat) ? $delta->delta_lat : '0' ?>,
+        <?= isset($delta->delta_long) ? $delta->delta_long : '0' ?>
+      </td>
+      <td><?= $delta->delta_distance_miles ?>/<?= $delta->delta_distance_kilometers ?></td>
+      <td><?= $delta->miles_per_hour ?>/<?= $delta->kilometers_per_hour ?></td>
+    </tr>
+    <?php $prev = $position; ?>
+  <?php endforeach; ?>
+  </tbody>
+</table>
 
-	<footer>
-		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-	</footer>
+<hr>
+
+<footer>
+  <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+</footer>
 

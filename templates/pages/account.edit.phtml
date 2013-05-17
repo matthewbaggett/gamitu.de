@@ -5,16 +5,21 @@
     <div class="span9">
       <div class="row-fluid">
         <div class="span12">
-          <h2><?=t("My Details")?></h2>
-          <p><?=t("The following details are from Google")?>:</p>
+          <h2><?= t("My Details") ?></h2>
 
-        </div><!--/span-->
-      </div><!--/row-->
-    </div><!--/span-->
-  </div><!--/row-->
-<hr>
+          <p><?= t("The following details are from Google") ?>:</p>
 
-<footer>
-  <p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-</footer>
+        </div>
+        <!--/span-->
+      </div>
+      <!--/row-->
+    </div>
+    <!--/span-->
+  </div>
+  <!--/row-->
+  <hr>
+
+  <footer>
+    <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+  </footer>
 

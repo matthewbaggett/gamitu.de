@@ -5,17 +5,22 @@
     <div class="span9">
       <div class="row-fluid">
         <div class="span12">
-          <h2><?=t("Scheduled Checkins")?></h2>
-          <p><?=t("Below are a list of the checkins that you have scheduled"); ?></p>
+          <h2><?= t("Scheduled Checkins") ?></h2>
+
+          <p><?= t("Below are a list of the checkins that you have scheduled"); ?></p>
           <?php $this->table($this->events); ?>
-        </div><!--/span-->
-      </div><!--/row-->
-    </div><!--/span-->
-  </div><!--/row-->
+        </div>
+        <!--/span-->
+      </div>
+      <!--/row-->
+    </div>
+    <!--/span-->
+  </div>
+  <!--/row-->
 
-<hr>
+  <hr>
 
-<footer>
-  <p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-</footer>
+  <footer>
+    <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+  </footer>
 

@@ -1,89 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="Content-type" value="text/html; charset=UTF-8" />
-		<title><?php echo $this->get_title();?></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="<?php echo $this->get_description();?>">
-		<meta name="author" content="<?php echo $this->get_author();?>">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-type" value="text/html; charset=UTF-8"/>
+  <title><?php echo $this->get_title(); ?></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<?php echo $this->get_description(); ?>">
+  <meta name="author" content="<?php echo $this->get_author(); ?>">
 
-		<!-- Le styles -->
-		<link href="/css/bootstrap.css" rel="stylesheet">
-		<style type="text/css">
-			body {
-				padding-top: 60px;
-				padding-bottom: 40px;
-			}
-		</style>
-		<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+  <!-- Le styles -->
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+  <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		
-		<link href="/css/custom.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
-		<!-- Fav and touch icons -->
-		<link rel="shortcut icon" href="/ico/favicon.ico">
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOp7CgK7IF_w97D_BIcU7iSb_544FOZro&sensor=false"></script>
-        
-        
-        		
-	</head>
+  <link href="/css/custom.css" rel="stylesheet">
 
-	<body>
+  <!-- Fav and touch icons -->
+  <link rel="shortcut icon" href="/ico/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOp7CgK7IF_w97D_BIcU7iSb_544FOZro&sensor=false"></script>
 
-		<?php require_once("navigation.phtml"); ?>
-		
-		<div class="fluid-container">
-			<?php require_once("messages.phtml"); ?>
-			<?php $this->render_page(); ?>
-		</div>
+</head>
 
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-    	<script src="/js/bootstrap-transition.js"></script>
-    	<script src="/js/bootstrap-alert.js"></script>
-    	<script src="/js/bootstrap-modal.js"></script>
-    	<script src="/js/bootstrap-dropdown.js"></script>
-    	<script src="/js/bootstrap-scrollspy.js"></script>
-    	<script src="/js/bootstrap-tab.js"></script>
-    	<script src="/js/bootstrap-tooltip.js"></script>
-    	<script src="/js/bootstrap-popover.js"></script>
-    	<script src="/js/bootstrap-button.js"></script>
-    	<script src="/js/bootstrap-collapse.js"></script>
-    	<script src="/js/bootstrap-carousel.js"></script>
-    	<script src="/js/bootstrap-typeahead.js"></script>
-    	<script type="text/javascript">
+<body>
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-37518321-1']);
-		  _gaq.push(['_trackPageview']);
-		
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		
-		</script>
-        
-        <script type="text/javascript" src="/js/konami.js"></script>
-        <script type="text/javascript">
-            var success = function() {
-                jQuery('body').append('<iframe src="http://adultcatfinder.com/embed/" width="320" height="430" style="position:fixed;bottom:0px;right:10px;z-index:100" frameBorder="0"></iframe>');
-        	}
-        	
-        	var konami = new Konami(success);
-        	
-        </script>
-	</body>
+<?php require_once("navigation.phtml"); ?>
+
+<div class="fluid-container">
+  <?php require_once("messages.phtml"); ?>
+  <?php $this->render_page(); ?>
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/bootstrap-transition.js"></script>
+<script src="/js/bootstrap-alert.js"></script>
+<script src="/js/bootstrap-modal.js"></script>
+<script src="/js/bootstrap-dropdown.js"></script>
+<script src="/js/bootstrap-scrollspy.js"></script>
+<script src="/js/bootstrap-tab.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script src="/js/bootstrap-popover.js"></script>
+<script src="/js/bootstrap-button.js"></script>
+<script src="/js/bootstrap-collapse.js"></script>
+<script src="/js/bootstrap-carousel.js"></script>
+<script src="/js/bootstrap-typeahead.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37518321-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script type="text/javascript" src="/js/konami.js"></script>
+<script type="text/javascript">
+  var success = function () {
+    jQuery('body').append('<iframe src="http://adultcatfinder.com/embed/" width="320" height="430" style="position:fixed;bottom:0px;right:10px;z-index:100" frameBorder="0"></iframe>');
+  }
+
+  var konami = new Konami(success);
+
+</script>
+</body>
 </html>

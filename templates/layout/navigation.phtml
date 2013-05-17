@@ -1,29 +1,31 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="fluid-container">
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</a>
-			<a class="brand" href="/"><?php echo t($this->get_sitename()); ?></a>
-			<div class="nav-collapse collapse">
-				<ul class="nav">
-          <li><?=l(t("Home"));?></li>
-					<?php if(user::is_loggedin()):?>
-          <li><?=l(t("My Dashboard"), "account");?></li>
+  <div class="navbar-inner">
+    <div class="fluid-container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/"><?php echo t($this->get_sitename()); ?></a>
+
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><?= l(t("Home")); ?></li>
+          <?php if (user::is_loggedin()): ?>
+            <li><?= l(t("My Dashboard"), "account"); ?></li>
           <?php endif; ?>
-				</ul>
-				<ul class="nav pull-right">
-					<?php if(user::is_loggedin()):?>
-            <li><?=l(t("Hello, @username",array('@username' => user::get_current_user()->get_username())),"account");?></li>
-            <li class="icon"><img src="<?=user::get_current_user()->get_face()?>"/></li>
-            <li><?=l(t("Sign out"), "user", "logout");?></li>
-					<?php else:?>
-						<li><?=l(t("Sign in"), "user", "login");?></li>
-					<?php endif; ?>
-				</ul>
-			</div><!--/.nav-collapse -->
-		</div>
-	</div>
+        </ul>
+        <ul class="nav pull-right">
+          <?php if (user::is_loggedin()): ?>
+            <li><?= l(t("Hello, @username", array('@username' => user::get_current_user()->get_username())), "account"); ?></li>
+            <li class="icon"><img src="<?= user::get_current_user()->get_face() ?>"/></li>
+            <li><?= l(t("Sign out"), "user", "logout"); ?></li>
+          <?php else: ?>
+            <li><?= l(t("Sign in"), "user", "login"); ?></li>
+          <?php endif; ?>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
 </div>

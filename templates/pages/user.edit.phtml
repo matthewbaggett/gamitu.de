@@ -1,28 +1,38 @@
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit">
-		<h1>Hello, <?=user::get_current_user()->get_firstname()?></h1>
-		<p>Welcome to Gamitude</p>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<h2>Heading</h2>
-			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-			<p><a class="btn" href="#">View details &raquo;</a></p>
-		</div>
-		<div class="span4">
-			<h2>Last Location</h2>
-			<p>We last saw you near <?=$this->user->get_last_location() instanceof point?$this->user->get_last_location()->get_town():'The Moon';?></p>
-			<p><a class="btn" href="/user/view-data-feed">View datafeed &raquo;</a></p>
-	 	</div>
-		<div class="span4">
-			<h2>Update your latitude feed manually</h2>
-			<p>You can manually trigger an update of your latitude feed</p>
-			<p><a class="btn btn-danger" href="/user/update-latitude-feed">Schnelle mein Führer! &raquo;</a></p>
-		</div>
-	</div>
-	<hr>
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+  <h1>Hello, <?= user::get_current_user()->get_firstname() ?></h1>
 
-	<footer>
-		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-	</footer>
+  <p>Welcome to Gamitude</p>
+</div>
+<div class="row">
+  <div class="span4">
+    <h2>Heading</h2>
+
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+      condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+      sed odio dui. </p>
+
+    <p><a class="btn" href="#">View details &raquo;</a></p>
+  </div>
+  <div class="span4">
+    <h2>Last Location</h2>
+
+    <p>We last saw you
+      near <?= $this->user->get_last_location() instanceof point ? $this->user->get_last_location()->get_town() : 'The Moon'; ?></p>
+
+    <p><a class="btn" href="/user/view-data-feed">View datafeed &raquo;</a></p>
+  </div>
+  <div class="span4">
+    <h2>Update your latitude feed manually</h2>
+
+    <p>You can manually trigger an update of your latitude feed</p>
+
+    <p><a class="btn btn-danger" href="/user/update-latitude-feed">Schnelle mein Führer! &raquo;</a></p>
+  </div>
+</div>
+<hr>
+
+<footer>
+  <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+</footer>
 

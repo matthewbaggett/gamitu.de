@@ -1,46 +1,55 @@
 <?php
 $random_salutations = array(
-    'Ola',
-    'Howdy',
-    'Bon dia',
-    'Сәлем',
-    'Tjike',
-    'Saluton'
+  'Ola',
+  'Howdy',
+  'Bon dia',
+  'Сәлем',
+  'Tjike',
+  'Saluton'
 );
 $random_salutation = $random_salutations[rand(0, count($random_salutations) - 1)];
 ?>
 
 <div class="hero-unit">
-    <?php if(!user::is_loggedin()):?>
-	<h1>Welcome to <?php echo $this->get_sitename();?></h1>
-	<p><?php echo $this->get_description()?></p>
-        <p><a href="/user/register-google" class="btn btn-primary btn-large">Login in with Google &raquo;</a></p>
-    <?php else: ?>
-        <h1><?php echo $random_salutation?>, <?=user::get_current_user()->get_username()?>!</h1>
-        <p>Dum de dum :T</p>
-    <?php endif; ?>
+  <?php if (!user::is_loggedin()): ?>
+    <h1>Welcome to <?php echo $this->get_sitename(); ?></h1>
+    <p><?php echo $this->get_description() ?></p>
+    <p><a href="/user/register-google" class="btn btn-primary btn-large">Login in with Google &raquo;</a></p>
+  <?php else: ?>
+    <h1><?php echo $random_salutation ?>, <?= user::get_current_user()->get_username() ?>!</h1>
+    <p>Dum de dum :T</p>
+  <?php endif; ?>
 </div>
 
 <div class="row">
-	<div class="span4">
-		<h2>Remember kids:</h2>
-		<p>Up, Up, Down, Down, Left, Right, Left, Right, B, A, Enter</p>
-	</div>
-	<div class="span4">
-		<h2>Heading</h2>
-		<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-		<p><a class="btn" href="#">View details &raquo;</a></p>
- 	</div>
-	<div class="span4">
-		<h2>Heading</h2>
-		<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-		<p><a class="btn" href="#">View details &raquo;</a></p>
-	</div>
+  <div class="span4">
+    <h2>Remember kids:</h2>
+
+    <p>Up, Up, Down, Down, Left, Right, Left, Right, B, A, Enter</p>
+  </div>
+  <div class="span4">
+    <h2>Heading</h2>
+
+    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+      condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+      sed odio dui. </p>
+
+    <p><a class="btn" href="#">View details &raquo;</a></p>
+  </div>
+  <div class="span4">
+    <h2>Heading</h2>
+
+    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis
+      euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+      sit amet risus.</p>
+
+    <p><a class="btn" href="#">View details &raquo;</a></p>
+  </div>
 </div>
 
 <hr>
 
 <footer>
-	<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
+  <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
 </footer>
 

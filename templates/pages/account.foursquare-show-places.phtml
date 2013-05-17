@@ -5,21 +5,27 @@
     <div class="span9">
       <div class="row-fluid">
         <div class="span12">
-          <h2><?=t("Foursquare Locations")?>:</h2>
-        </div><!--/span-->
-      </div><!--/row-->
-    </div><!--/span-->
+          <h2><?= t("Foursquare Locations") ?>:</h2>
+        </div>
+        <!--/span-->
+      </div>
+      <!--/row-->
+    </div>
+    <!--/span-->
     <div class="span9">
       <div class="row-fluid">
         <div class="span12">
-          <?=$this->table($this->venue_history); ?>
-        </div><!--/span-->
-      </div><!--/row-->
-    </div><!--/span-->
+          <?= $this->table($this->venue_history); ?>
+        </div>
+        <!--/span-->
+      </div>
+      <!--/row-->
+    </div>
+    <!--/span-->
   </div>
-<hr>
+  <hr>
 
-<footer>
-  <p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-</footer>
+  <footer>
+    <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+  </footer>
 

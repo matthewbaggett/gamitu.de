@@ -1,29 +1,29 @@
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+  <h1>Right, one last job...</h1>
 
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit">
-		<h1>Right, one last job...</h1>
-		<p>Give us a Username & Password so you can login to Gamitu.de</p>
-	</div>
-	
-	<div class="row">
-		<div class="span4">
-			<form class="navbar-form pull-left" action="/user/register" method="post">
-				
-				<fieldset>
-					<legend>Registration</legend>
-					<label>Username</label>
-					<input name="username" type="text" placeholder="joe_blogs">
-					<label>Password</label>
-					<input name="password" type="password" placeholder="password">
-					<button type="submit" class="btn">Yes that really is it...</button>
-				</fieldset>
-			</form>
-		</div>
-	</div>
+  <p>Give us a Username & Password so you can login to Gamitu.de</p>
+</div>
 
-	<hr>
+<div class="row">
+  <div class="span4">
+    <form class="navbar-form pull-left" action="/user/register" method="post">
 
-	<footer>
-		<p>&copy; <?=$this->get_author();?> <?=date("Y");?></p>
-	</footer>
+      <fieldset>
+        <legend>Registration</legend>
+        <label>Username</label>
+        <input name="username" type="text" placeholder="joe_blogs">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="password">
+        <button type="submit" class="btn">Yes that really is it...</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<footer>
+  <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+</footer>
 
