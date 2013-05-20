@@ -21,10 +21,9 @@ class MapController extends BaseController {
     }
 
     if(isset($_GET['user_id'])){
-      $user_id = intval($_GET['user_id']);
-      $interrogated_user = user::search()->where('uid', $user_id)->execOne();
+      $interrogated_user = user::search()->where('uid', $_GET['user_id'])->execOne();
     }
-    if(!$interrogated_user instanceof user){
+    if(!isset($interrogated_user)){
       $interrogated_user = user::get_current_user();
     }
 
