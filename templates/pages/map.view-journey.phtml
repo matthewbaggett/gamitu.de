@@ -1,50 +1,63 @@
-<h1><?php echo $this->user->get_username();?>'s Travel between <?php echo date("Y-m-d H:i:s", $this->start) ?> and <?php echo date("Y-m-d H:i:s", $this->end) ?> </h1>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <?php require("account.navigation.phtml"); ?>
 
-<div class="big_map_canvas" id="map_canvas"></div>
-<hr>
+    <div class="span9">
+      <div class="row-fluid">
+        <div class="span12">
+          <h1>
+            <?php echo $this->user->get_username(); ?>'s Travel
+            between <?php echo date("Y-m-d H:i:s", $this->start) ?>
+            and <?php echo date("Y-m-d H:i:s", $this->end) ?>
+          </h1>
 
-<script>
-  var map;
-  function initialize() {
-    var mapOptions = {
-      zoom: 8,
-      center: <?php echo end($this->points)->get_google_maps_lat_lng(); ?>,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(
-      document.getElementById('map_canvas'),
-      mapOptions
-    );
+          <div class="big_map_canvas" id="map_canvas"></div>
+          <hr>
 
-    var routeCoordinates = [
-      <?php foreach($this->points as $point): ?>
-        <?php echo $point->get_google_maps_lat_lng(); ?>,
-      <?php endforeach; ?>
-    ];
+          <script>
+            var map;
+            function initialize() {
+              var mapOptions = {
+                zoom: 8,
+                center: <?php echo end($this->points)->get_google_maps_lat_lng(); ?>,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+              map = new google.maps.Map(
+                document.getElementById('map_canvas'),
+                mapOptions
+              );
 
-    var routePath = new google.maps.Polyline({
-      path: routeCoordinates,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
+              var routeCoordinates = [
+                <?php foreach($this->points as $point): ?>
+                <?php echo $point->get_google_maps_lat_lng(); ?>,
+                <?php endforeach; ?>
+              ];
 
-    routePath.setMap(map);
+              var routePath = new google.maps.Polyline({
+                path: routeCoordinates,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+              });
 
-  }
-  jQuery(document).ready(function(){
-    google.maps.event.addDomListener(window, 'load', initialize);
-  });
+              routePath.setMap(map);
 
-</script>
+            }
+            jQuery(document).ready(function () {
+              google.maps.event.addDomListener(window, 'load', initialize);
+            });
 
-<?php krumo($this); ?>
+          </script>
 
-<footer>
-  <p>
-    &copy;
-    <?= $this->get_author(); ?>
-    <?= date("Y"); ?>
-  </p>
-</footer>
+          <?php krumo($this); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p>&copy; <?= $this->get_author(); ?> <?= date("Y"); ?></p>
+  </footer>
 
