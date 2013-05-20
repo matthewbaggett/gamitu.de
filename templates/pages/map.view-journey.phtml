@@ -10,7 +10,33 @@
             between <?php echo date("Y-m-d H:i:s", $this->start) ?>
             and <?php echo date("Y-m-d H:i:s", $this->end) ?>
           </h1>
+        </div>
 
+        <div class="span12">
+          <form action="" method="POST">
+            <div class="control-group">
+              <label class="control-label">Range:</label>
+              <div class="controls">
+                <div class="btn-group">
+                  <input type="submit" class="btn" value="Day">
+                  <input type="submit" class="btn" value="Week">
+                  <input type="submit" class="btn" value="Year">
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Point:</label>
+              <div class="controls">
+                <div class="btn-group">
+                  <input type="submit" class="btn" value="Forwards">
+                  <input type="submit" class="btn" value="Backwards">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="span12">
           <div class="big_map_canvas" id="map_canvas"></div>
           <hr>
 
