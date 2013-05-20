@@ -48,8 +48,9 @@
             });
 
           </script>
-
-          <?php krumo($this); ?>
+          <?php if (user::get_current_user()->get_uid() == 1): ?>
+            <?php krumo($this); ?>
+          <?php endif; ?>
         </div>
       </div>
     </div>
