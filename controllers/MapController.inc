@@ -98,6 +98,8 @@ class MapController extends BaseController {
     $this->_view->user = $interrogated_user;
     $this->_view->start = $start;
     $this->_view->end = $end;
+    $this->_view->range_days = $_SESSION['range'] / self::one_day_in_seconds;
+    $this->_view->offset_days = $_SESSION['offset'] / self::one_day_in_seconds;
 
   }
 }

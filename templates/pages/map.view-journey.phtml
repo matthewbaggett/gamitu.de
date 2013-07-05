@@ -15,7 +15,7 @@
         <div class="span12">
           <form action="" method="POST">
             <div class="control-group">
-              <label class="control-label">Date Range:</label>
+              <label class="control-label"><?php echo t("Date Range"); ?>:</label>
               <div class="controls">
                 <div class="btn-group">
                   <input name="range" type="submit" class="btn" value="Day">
@@ -26,12 +26,18 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Date Point Position:</label>
+              <label class="control-label"><?php echo t("Date Point Position"); ?>:</label>
               <div class="controls">
                 <div class="btn-group">
                   <input name="offset" type="submit" class="btn" value="Backwards">
                   <input name="offset" type="submit" class="btn" value="Forwards">
                 </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label"><?php echo t("Share this map"); ?>:</label>
+              <div class="controls">
+                <input value="<?php echo "https://gamitu.de/map/view-journey?user_id={$interrogated_user->uid}&range={$range_days}&offset={$offset_days}"; ?>"/>
               </div>
             </div>
           </form>
