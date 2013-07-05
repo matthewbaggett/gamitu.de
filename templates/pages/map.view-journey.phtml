@@ -37,7 +37,7 @@
             <div class="control-group">
               <label class="control-label"><?php echo t("Share this map"); ?>:</label>
               <div class="controls">
-                <input value="<?php echo "https://gamitu.de/map/view-journey?user_id={$this->interrogated_user->uid}&range={$this->range_days}&offset={$this->offset_days}"; ?>"/>
+                <input value="<?php echo "https://gamitu.de/map/view-journey?user_id={$this->user->uid}&range={$this->range_days}&offset={$this->offset_days}"; ?>"/>
               </div>
             </div>
           </form>
@@ -82,8 +82,10 @@
               });
 
             </script>
-            <?php if (user::get_current_user()->get_uid() == 1): ?>
-              <?php krumo($this); ?>
+            <?php if(user::get_current_user()): ?>
+              <?php if (user::get_current_user()->get_uid() == 1): ?>
+                <?php krumo($this); ?>
+              <?php endif; ?>
             <?php endif; ?>
           <?php endif; ?>
         </div>
