@@ -1,6 +1,8 @@
 <?php
 
 class MapController extends BaseController {
+  const one_day_in_seconds = 86400;
+
   public function ViewLocationAction() {
     $ll                = explode(",", $_GET['ll'], 2);
     $this->_view->lat  = $ll[0];
@@ -8,21 +10,41 @@ class MapController extends BaseController {
   }
 
   public function ViewJourneyAction(){
-    if(isset($_POST)){
-      krumo($_POST);
+    if(!isset($_SESSION['range'])){
+      $_SESSION['range'] = self::one_day_in_seconds;
+
+    }
+    if(!isset($_SESSION['offset'])){
+      $_SESSION['offset'] = 0;
     }
 
-    if(isset($_GET['start'])){
-      $start = strtotime($_GET['start']);
-    }else{
-      $start = strtotime("24 hours ago");
+    if(count($_POST) > 0){
+      if(isset($_POST['range'])){
+        if($_POST['range'] == 'Day'){
+          $_SESSION['range'] = self::one_day_in_seconds;
+        }
+        if($_POST['range'] == 'Week'){
+          $_SESSION['range'] = self::one_day_in_seconds * 7;
+        }
+        if($_POST['range'] == 'Month'){
+          $_SESSION['range'] = self::one_day_in_seconds * 28;
+        }
+        if($_POST['range'] == 'Year'){
+          $_SESSION['range'] = self::one_day_in_seconds * 365;
+        }
+      }
+      if(isset($_POST['offset'])){
+        if($_POST['offset'] == 'Forwards'){
+          $_SESSION['offset'] = $_SESSION['offset'] + $_SESSION['range'];
+        }
+        if($_POST['offset'] == 'Backwards'){
+          $_SESSION['offset'] = $_SESSION['offset'] - $_SESSION['range'];
+        }
+      }
     }
 
-    if(isset($_GET['end'])){
-      $end = strtotime($_GET['end']);
-    }else{
-      $end = time();
-    }
+    $start  = time() + $_SESSION['offset'];
+    $end    = time() + $_SESSION['offset'] + $_SESSION['range'];
 
     if(isset($_GET['user_id'])){
       $interrogated_user = user::search()->where('uid', $_GET['user_id'])->execOne();
