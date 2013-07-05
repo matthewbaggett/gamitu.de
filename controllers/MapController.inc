@@ -41,6 +41,16 @@ class MapController extends BaseController {
           $_SESSION['offset'] = $_SESSION['offset'] - $_SESSION['range'];
         }
       }
+      header("Location: /map/view-journey?range={$_SESSION['range']}&offset={$_SESSION['offset']}");
+      exit;
+    }
+
+    // Load offset & range from GET.
+    if(isset($_GET['range']) && is_int($_GET['range'])){
+      $_SESSION['range'] = $_GET['range'];
+    }
+    if(isset($_GET['offset']) && is_int($_GET['offset'])){
+      $_SESSION['offset'] = $_GET['offset'];
     }
 
     $start  = time() + $_SESSION['offset'];
