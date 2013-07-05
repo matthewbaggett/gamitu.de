@@ -1,8 +1,10 @@
 <?php $messages = (array)\tcore\tcore::get_messages(); ?>
 <?php if(is_array($messages)): ?>
   <?php foreach ($messages as $message): ?>
-    <div class="alert alert-<?php echo $message->type ?>">
-      <?php echo $message->message; ?>
-    </div>
+    <?php if(is_object($message)): ?>
+      <div class="alert alert-<?php echo $message->type ?>">
+        <?php echo $message->message; ?>
+      </div>
+    <?php endif; ?>
   <?php endforeach; ?>
 <?php endif; ?>
