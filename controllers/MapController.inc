@@ -8,6 +8,10 @@ class MapController extends BaseController {
   }
 
   public function ViewJourneyAction(){
+    if(isset($_POST)){
+      krumo($_POST);
+    }
+
     if(isset($_GET['start'])){
       $start = strtotime($_GET['start']);
     }else{
