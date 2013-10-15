@@ -1,6 +1,9 @@
 gamitu.de
 =========
 
+Discontinued since Google killed Latitude. Bastards.
+=========
+
 A fun lil' web application for tracking your location &amp; movement - Gamification of Travel &amp; Movement
 
 Current Feature List:
